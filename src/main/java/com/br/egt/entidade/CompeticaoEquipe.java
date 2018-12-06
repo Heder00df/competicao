@@ -5,27 +5,26 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
-@Getter
 @Setter
+@Getter
 @Entity
-public class Equipe implements Serializable {
+public class CompeticaoEquipe implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_equipe")
+    @Column(name = "id_competicao_equipe")
     private Long id;
-
-    private  String descricao;
-
-    @OneToMany(mappedBy = "equipe")
-    private List<Atleta> atletas;
 
     @ManyToOne
     @JoinColumn(name = "id_competicao")
-    private CompeticaoEquipe competicao;
+    private Competicao competicao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_equipe")
+    private Equipe equipe;
 
 
 

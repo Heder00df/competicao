@@ -13,8 +13,14 @@ public class Fase implements Serializable {
     @Column(name = "id_fase")
     private Long id;
 
+    private String descricao;
+
     @Enumerated
     private TipoFase tipoFase;
+
+    @ManyToOne
+    @JoinColumn(name = "id_competicao")
+    private Competicao competicao;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_jogo")
