@@ -20,12 +20,11 @@ public class Equipe implements Serializable {
 
     private  String descricao;
 
-    @OneToMany(mappedBy = "equipe")
-    private List<Atleta> atletas;
+    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
+    private List<EquipeAtleta> equipeAtletas;
 
-    @ManyToOne
-    @JoinColumn(name = "id_competicao")
-    private CompeticaoEquipe competicao;
+    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
+    private List<CompeticaoEquipe> competicoesEquipe;
 
 
 

@@ -1,10 +1,6 @@
 package com.br.egt.entidade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +14,11 @@ public class Telefone {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="id_telefone")
 	private Long id;
+
 	private Long numero;
+
+	@ManyToOne
+	@JoinColumn(name = "id_atleta")
+	private Atleta atleta;
 	
 }

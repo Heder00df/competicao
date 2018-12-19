@@ -4,26 +4,24 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import com.br.egt.entidade.dtos.AtletaDto;
 import com.br.egt.service.AtletaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.br.egt.entidade.Atleta;
-import com.br.egt.entidade.Endereco;
 
 @RestController
 @RequestMapping(value = "/atleta")
 public class AtletaController {
 
 	@Autowired
-	private AtletaService atletaService;
+	private AtletaService service;
 
-	@PostMapping("/inlcuir-atleta")
-	public void incluirPessoa(Atleta atleta) {
-		
+	@PostMapping("/incluir")
+	public AtletaDto salvarAtleta(@RequestBody Atleta atleta) {
+		return service.salvar(atleta);
+
 	}
 	
 	@GetMapping("/atletas")

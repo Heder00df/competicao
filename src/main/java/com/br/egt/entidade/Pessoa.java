@@ -3,10 +3,7 @@ package com.br.egt.entidade;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,18 +13,13 @@ import lombok.Setter;
 @MappedSuperclass
 public class Pessoa implements Serializable{
 	private static final long serialVersionUID = 1L;
-
 	private String nome;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_endereco")
 	private Endereco endereco;
 	
 	private String email;
-	
-	@OneToMany
-	@JoinColumn(name="id_telefone")
-	private List<Telefone> telefone;
 
 
 }

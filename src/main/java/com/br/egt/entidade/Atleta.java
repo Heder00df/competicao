@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Time;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,7 +20,10 @@ public class Atleta extends PessoaFisica {
 	private Long id;
 	private String posicao;
 
-	@ManyToOne
-	@JoinColumn(name = "id_equipe")
-	private Equipe equipe;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atleta")
+	private List<EquipeAtleta> equipe;
+
+	@OneToMany(mappedBy = "atleta", cascade = CascadeType.ALL)
+	private List<Telefone> telefones;
+
 }
