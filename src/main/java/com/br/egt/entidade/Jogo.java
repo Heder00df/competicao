@@ -1,23 +1,60 @@
 package com.br.egt.entidade;
 
-import org.hibernate.annotations.JoinColumnOrFormula;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 public class Jogo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_jogo")
-    private Long id;
+    @EmbeddedId
+    private JogoPK pk = new JogoPK();
 
     private LocalDate data;
 
     @ManyToOne
     @JoinColumn(name = "id_campo")
     private Campo campo;
+
+    public Jogo(){}
+
+    public Jogo(Equipe mandante, Equipe visitante){
+        setMandante(mandante);
+        setVisitante(visitante);
+    }
+
+
+    public Equipe getVisitante(){
+        return pk.getVisitante();
+    }
+    public Equipe getMandante(){
+        return pk.getMandante();
+    }
+    public void setVisitante(Equipe visitante){
+        pk.setVisitante(visitante);
+    }
+    public void setMandante(Equipe mandante){
+        pk.setMandante(mandante);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Jogo jogo = (Jogo) o;
+        return pk.equals(jogo.pk);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pk);
+    }
+
 }

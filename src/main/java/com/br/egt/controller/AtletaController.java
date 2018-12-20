@@ -26,12 +26,7 @@ public class AtletaController {
 	
 	@GetMapping("/atletas")
 	public List<Atleta> atletas() {
-		Atleta atleta = new Atleta();
-		atleta.setCpf(1212222L);
-		atleta.setDataNascimento(LocalDate.of(1981, 10, 18));
-		atleta.setEmail("heder00df@gmail.com");
-
-		return Arrays.asList(atleta);
+		return service.recuperarAtletas();
 	}
 
 }

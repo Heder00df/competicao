@@ -19,4 +19,8 @@ public class AtletaService {
          atleta.getTelefones().forEach( f-> f.setAtleta(atleta));
         return new AtletaDto(rep.save(atleta));
     }
+
+    public List<Atleta> recuperarAtletas() {
+        return rep.findAll();
+    }
 }

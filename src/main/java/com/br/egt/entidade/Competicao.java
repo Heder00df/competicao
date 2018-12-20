@@ -33,4 +33,6 @@ public class Competicao implements Serializable {
     @OneToMany(mappedBy = "competicao", cascade = CascadeType.ALL)
     private List<Fase> fases;
 
+
+
 }
