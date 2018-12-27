@@ -7,6 +7,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 @Getter
@@ -19,4 +20,19 @@ public class JogoPK implements Serializable {
     @ManyToOne
     @JoinColumn(name = "mandate_id")
     private Equipe mandante;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JogoPK jogoPK = (JogoPK) o;
+        return visitante.equals(jogoPK.visitante) &&
+                mandante.equals(jogoPK.mandante);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(visitante, mandante);
+    }
 }

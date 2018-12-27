@@ -19,15 +19,19 @@ public class Jogo implements Serializable {
 
     private LocalDate data;
 
+    private Integer rodada;
     @ManyToOne
     @JoinColumn(name = "id_campo")
     private Campo campo;
 
+
+
     public Jogo(){}
 
-    public Jogo(Equipe mandante, Equipe visitante){
+    public Jogo(Equipe mandante, Equipe visitante, Integer rodada){
         setMandante(mandante);
         setVisitante(visitante);
+        setRodada(rodada);
     }
 
 
