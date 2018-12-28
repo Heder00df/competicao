@@ -16,17 +16,25 @@ public class JogoService {
     @Autowired
     private JogoRepository repo;
 
-    public void gerarPartidas(List<Equipe> mandantes, List<Equipe> visitantes) {
+    public List<Jogo> recuperarJogos() {
+        return repo.findAll();
+    }
 
-        Collections.shuffle(mandantes);
+    public List<Jogo> recuperaJogosPorRodada(Integer rodada){
+        return  repo.recuperaJogosPorRodada(rodada);
+    }
 
-        if (mandantes.size() % 2 == 0) {
+    public void gerarPartidas(List<Equipe> equipes) {
 
-            gerarConfrontosPar(mandantes);
+        Collections.shuffle(equipes);
+
+        if (equipes.size() % 2 == 0) {
+
+            gerarConfrontosPar(equipes);
 
         } else {
 
-            gerarConfrontosImpar(mandantes);
+            gerarConfrontosImpar(equipes);
 
         }
     }
@@ -71,4 +79,5 @@ public class JogoService {
         }
         repo.saveAll(jogos);
     }
+
 }

@@ -9,6 +9,6 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "cliente")
     private List<Usuario> usuarios;
 }
