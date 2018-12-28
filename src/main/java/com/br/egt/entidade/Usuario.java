@@ -18,6 +18,10 @@ public class Usuario {
     @JsonIgnore
     private String senha;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+
     @Enumerated
     private Perfil perfil;
 
