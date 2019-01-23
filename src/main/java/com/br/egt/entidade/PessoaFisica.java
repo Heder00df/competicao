@@ -14,5 +14,6 @@ public class PessoaFisica extends Pessoa {
 	private Long cpf;
 	private LocalDate dataNascimento;
 	private Long rg;
+	private String nome;
 	
 }

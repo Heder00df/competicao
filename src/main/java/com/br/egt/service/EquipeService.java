@@ -23,4 +23,8 @@ public class EquipeService {
     public List<Equipe> recuperarEquipes() {
         return rep.findAll();
     }
+
+    public void excluir(Equipe equipe) {
+        rep.delete(equipe);
+    }
 }

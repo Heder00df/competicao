@@ -19,7 +19,14 @@ public class EquipeController {
 		return service.salvar(equipe);
 
 	}
-	
+
+	@PostMapping("/excluir")
+	public List<Equipe> excluirEquipe(@RequestBody Equipe equipe) {
+		service.excluir(equipe);
+		return service.recuperarEquipes();
+	}
+
+
 	@GetMapping("/equipes")
 	public List<Equipe> atletas() {
 		return service.recuperarEquipes();
