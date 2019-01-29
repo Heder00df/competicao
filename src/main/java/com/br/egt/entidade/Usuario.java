@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-@Entity
 @Getter
 @Setter
+@Entity
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +24,19 @@ public class Usuario {
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
-    @Enumerated
-    private Perfil perfil;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable()
+    private Set<Integer> perfils;
+
+
+    public Set<Perfil> getPerfil(){
+        return perfils.stream().map(p-> Perfil.toEnum(p)).collect(Collectors.toSet());
+    }
+
+    public void addPerfil(Perfil perfil){
+        perfils.add(perfil.getCodigo());
+    }
+
 
 
 }

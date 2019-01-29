@@ -1,5 +1,6 @@
 package com.br.egt.entidade;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ public class EquipeAtleta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "id_atlera")
     private Atleta atleta;
