@@ -2,6 +2,7 @@ package com.br.egt.entidade;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,7 @@ public class Telefone implements Serializable {
 
 	private Long numero;
 
-	@JsonManagedReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_atleta")
 	private Atleta atleta;

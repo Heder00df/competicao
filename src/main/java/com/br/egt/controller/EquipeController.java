@@ -5,6 +5,7 @@ import com.br.egt.service.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -14,8 +15,8 @@ public class EquipeController {
 	@Autowired
 	private EquipeService service;
 
-	@PostMapping("/incluir")
-	public Equipe salvarAtleta(@RequestBody Equipe equipe) {
+	@PostMapping(value = "/incluir")
+	public Equipe salvarEquipe(@RequestBody Equipe equipe) {
 		return service.salvar(equipe);
 
 	}
@@ -28,8 +29,11 @@ public class EquipeController {
 
 
 	@GetMapping("/equipes")
-	public List<Equipe> atletas() {
+	public List<Equipe> equipes() {
+		//Equipe e  = new Equipe();
+		//e.setDescricao("Panelinha");
 		return service.recuperarEquipes();
+		//return Arrays.asList(e);
 	}
 
 }

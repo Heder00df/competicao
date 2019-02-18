@@ -3,6 +3,7 @@ package com.br.egt.entidade;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,11 +23,11 @@ public class Atleta extends PessoaFisica implements Serializable {
 	private Long id;
 	private String posicao;
 
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atleta")
 	private List<EquipeAtleta> equipe;
 
-	@JsonBackReference
+
 	@OneToMany(mappedBy = "atleta", cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 

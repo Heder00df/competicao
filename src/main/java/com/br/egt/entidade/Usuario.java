@@ -15,9 +15,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
     private String email;
-    @JsonIgnore
     private String senha;
 
     @ManyToOne
@@ -28,8 +26,7 @@ public class Usuario {
     @CollectionTable()
     private Set<Integer> perfils;
 
-
-    public Set<Perfil> getPerfil(){
+    public Set<Perfil> getPerfis(){
         return perfils.stream().map(p-> Perfil.toEnum(p)).collect(Collectors.toSet());
     }
 

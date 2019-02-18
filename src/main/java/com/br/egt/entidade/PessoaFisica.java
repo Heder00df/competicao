@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.MappedSuperclass;
+import javax.persistence.UniqueConstraint;
+import javax.validation.Constraint;
 
 import lombok.Getter;
 import lombok.Setter;

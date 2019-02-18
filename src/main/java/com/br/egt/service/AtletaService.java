@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,12 @@ public class AtletaService {
 
     public AtletaDto salvar(Atleta atleta) {
          atleta.getTelefones().forEach( f-> f.setAtleta(atleta));
+
+         Atleta atl = rep.findByCpf(atleta.getCpf());
+
+         if(atl != null){
+             throw new IllegalArgumentException("Atleta já cadastrado");
+         }
         return new AtletaDto(rep.save(atleta));
     }
 
