@@ -1,5 +1,6 @@
 package com.br.egt.controller;
 
+import com.br.egt.entidade.CompeticaoEquipe;
 import com.br.egt.entidade.Equipe;
 import com.br.egt.service.EquipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,7 @@ public class EquipeController {
 
 	@GetMapping("/equipes")
 	public List<Equipe> equipes() {
-		//Equipe e  = new Equipe();
-		//e.setDescricao("Panelinha");
 		return service.recuperarEquipes();
-		//return Arrays.asList(e);
 	}
 
 }

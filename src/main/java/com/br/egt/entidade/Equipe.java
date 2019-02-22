@@ -1,7 +1,9 @@
 package com.br.egt.entidade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,11 +22,11 @@ public class Equipe implements Serializable {
 
     private  String descricao;
 
-    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
-    private List<EquipeAtleta> equipeAtletas;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
-    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
-    private List<CompeticaoEquipe> competicoesEquipe;
+
 
 
 

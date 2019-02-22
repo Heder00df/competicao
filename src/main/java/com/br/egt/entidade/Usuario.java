@@ -22,6 +22,7 @@ public class Usuario {
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable()
     private Set<Integer> perfils;

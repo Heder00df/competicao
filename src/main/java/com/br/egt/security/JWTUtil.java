@@ -2,6 +2,7 @@ package com.br.egt.security;
 
 import java.util.Date;
 
+import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -18,9 +19,13 @@ public class JWTUtil {
 	@Value("${jwt.expiration}")
 	private Long expiration;
 	
-	public String generateToken(String username) {
+	public String generateToken(UserSpringSecurity uss) {
+		Claims claims = new DefaultClaims();
+		claims.put("perfis", uss.getAuthorities());
+		claims.put("codigoUsuario",uss.getId());
 		return Jwts.builder()
-				.setSubject(username)
+				.setSubject(uss.getUsername())
+				.setClaims(claims)
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
 				.compact();

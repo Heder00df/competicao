@@ -16,6 +16,8 @@ public class UserSpringSecurity implements UserDetails {
     private String email;
     private String senha;
     private Collection<? extends GrantedAuthority> authorities;
+    private Long codigoCliente;
+    private Long codigoEquipe;
 
     public UserSpringSecurity(Long id, String email, String senha, Set<Perfil> perfis) {
         this.id = id;
@@ -29,6 +31,15 @@ public class UserSpringSecurity implements UserDetails {
     public Long getId(){
         return id;
     }
+
+    public Long getCodigoCliente() {
+        return codigoCliente;
+    }
+
+    public Long getCodigoEquipe() {
+        return codigoEquipe;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
