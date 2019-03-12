@@ -27,6 +27,14 @@ public class Usuario {
     @CollectionTable()
     private Set<Integer> perfils;
 
+    public Usuario(){}
+
+    public Usuario(String email, Cliente cli, String senha) {
+        this.email = email;
+        this.cliente = cli;
+        this.senha=senha;
+    }
+
     public Set<Perfil> getPerfis(){
         return perfils.stream().map(p-> Perfil.toEnum(p)).collect(Collectors.toSet());
     }

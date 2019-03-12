@@ -23,9 +23,11 @@ public class JWTUtil {
 		Claims claims = new DefaultClaims();
 		claims.put("perfis", uss.getAuthorities());
 		claims.put("codigoUsuario",uss.getId());
+		claims.put("codigoCliente",uss.getCodigoCliente());
+		claims.setSubject(uss.getUsername());
 		return Jwts.builder()
-				.setSubject(uss.getUsername())
 				.setClaims(claims)
+				.setSubject(uss.getUsername())
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
 				.compact();

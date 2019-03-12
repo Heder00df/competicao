@@ -26,7 +26,7 @@ public class JogoController {
 
     @GetMapping("/gerar-jogos")
     public void gerarPartidas(){
-        List<Equipe> equipes = equipeService.recuperarEquipes();
+        List<Equipe> equipes = equipeService.equipes();
         jogoService.gerarPartidas(equipes);
 
     }

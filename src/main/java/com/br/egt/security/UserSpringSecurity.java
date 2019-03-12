@@ -19,13 +19,14 @@ public class UserSpringSecurity implements UserDetails {
     private Long codigoCliente;
     private Long codigoEquipe;
 
-    public UserSpringSecurity(Long id, String email, String senha, Set<Perfil> perfis) {
+    public UserSpringSecurity(Long id, String email, String senha, Set<Perfil> perfis,Long codigoCliente) {
         this.id = id;
         this.email = email;
         this.senha = senha;
         this.authorities = perfis.stream()
                 .map(p-> new SimpleGrantedAuthority(p.getDescricao()))
                 .collect(Collectors.toList());
+        this.codigoCliente = codigoCliente;
     }
 
     public Long getId(){

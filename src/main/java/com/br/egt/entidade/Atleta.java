@@ -23,9 +23,9 @@ public class Atleta extends PessoaFisica implements Serializable {
 	private Long id;
 	private String posicao;
 
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atleta")
-	private List<EquipeAtleta> equipe;
+	@ManyToOne
+	@JoinColumn(name = "id_equipe")
+	private Equipe equipe;
 
 
 	@OneToMany(mappedBy = "atleta", cascade = CascadeType.ALL)

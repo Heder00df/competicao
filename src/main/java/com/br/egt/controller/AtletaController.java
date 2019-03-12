@@ -1,6 +1,5 @@
 package com.br.egt.controller;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,7 +10,6 @@ import com.br.egt.entidade.dtos.AtletaDto;
 import com.br.egt.service.AtletaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import com.br.egt.entidade.Atleta;
@@ -24,7 +22,7 @@ public class AtletaController {
 	private AtletaService service;
 
 	@PostMapping(value = "/incluir")
-	public AtletaDto salvarAtleta(@RequestBody Atleta atleta) {
+	public AtletaDto salvarAtleta(@RequestBody AtletaDto atleta) {
 
 		return service.salvar(atleta);
 
@@ -34,13 +32,15 @@ public class AtletaController {
 	public List<Atleta> atletas() {
 		Atleta a = new Atleta();
 		a.setPosicao("Lateral");
+		a.setCpf(69338969172L);
+		a.setNome("Heder Machado");
+		a.setIdentidade(1895541L);
+
 		Telefone tel  = new Telefone();
 		tel.setNumero(34593824L);
 		tel.setId(1L);
 		a.setTelefones(Arrays.asList(tel));
-		a.setCpf(69338969172L);
-		a.setNome("Heder Machado");
-		a.setRg(1895541L);
+
 		Endereco end = new Endereco();
 		end.setComplemento("Apartamento");
 		end.setNumero(304L);

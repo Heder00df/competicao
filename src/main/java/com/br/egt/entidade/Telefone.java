@@ -26,5 +26,11 @@ public class Telefone implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_atleta")
 	private Atleta atleta;
-	
+
+	public Telefone(){};
+
+	public Telefone(Long numero, Atleta atleta) {
+		this.numero = numero;
+		this.atleta = atleta;
+	}
 }

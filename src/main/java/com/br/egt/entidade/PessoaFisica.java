@@ -16,7 +16,7 @@ public class PessoaFisica extends Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long cpf;
 	private LocalDate dataNascimento;
-	private Long rg;
+	private Long identidade;
 	private String nome;
 	
 }

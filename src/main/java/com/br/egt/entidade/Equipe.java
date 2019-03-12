@@ -15,6 +15,13 @@ import java.util.List;
 public class Equipe implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public Equipe(){}
+
+    public Equipe(String descricao, Long id) {
+        this.id = id;
+        this.descricao = descricao;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_equipe")
@@ -25,9 +32,6 @@ public class Equipe implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
-
-
-
 
 
 }

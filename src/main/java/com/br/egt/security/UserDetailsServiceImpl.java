@@ -22,6 +22,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(email);
         }
 
-        return new UserSpringSecurity(usuario.getId(),usuario.getEmail(), usuario.getSenha(), usuario.getPerfis());
+        return new UserSpringSecurity(usuario.getId()
+                ,usuario.getEmail()
+                , usuario.getSenha()
+                , usuario.getPerfis()
+                , usuario.getCliente().getId());
     }
 }
