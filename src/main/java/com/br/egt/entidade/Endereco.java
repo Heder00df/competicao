@@ -20,12 +20,4 @@ public class Endereco {
 	private String logradouro;
 	private String complemento;
 	private Long numero;
-
-	public Endereco(){};
-
-	public Endereco(String logradouro, String complemento, Long numero) {
-		this.logradouro = logradouro;
-		this.complemento = complemento;
-		this.numero = numero;
-	}
 }

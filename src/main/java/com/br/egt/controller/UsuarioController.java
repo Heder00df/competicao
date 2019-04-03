@@ -4,7 +4,6 @@ import com.br.egt.entidade.Usuario;
 import com.br.egt.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +15,7 @@ public class UsuarioController {
     private UsuarioService service;
 
     @PostMapping("/incluir")
-    public Usuario salvarUsuario(@RequestBody Usuario usuario){
+    public Usuario salvarUsuario(Usuario usuario){
         return service.salvarUsuario(usuario);
     }
 }

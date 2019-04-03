@@ -15,25 +15,19 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String login;
     private String email;
+    @JsonIgnore
     private String senha;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable()
     private Set<Integer> perfils;
 
-    public Usuario(){}
-
-    public Usuario(String email, Cliente cli, String senha) {
-        this.email = email;
-        this.cliente = cli;
-        this.senha=senha;
-    }
 
     public Set<Perfil> getPerfis(){
         return perfils.stream().map(p-> Perfil.toEnum(p)).collect(Collectors.toSet());

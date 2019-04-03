@@ -25,6 +25,4 @@ public class EquipeAtleta implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_equipe")
     private Equipe equipe;
-
-    private String anoAtuacao;
 }

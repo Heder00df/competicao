@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.br.egt</groupId>
-	<artifactId>e-gestao</artifactId>
+	<artifactId>e-competicao</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>e-gestao</name>
+	<name>e-competicao</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>

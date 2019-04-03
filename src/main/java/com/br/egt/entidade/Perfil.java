@@ -8,8 +8,8 @@ import javax.swing.*;
 
 public enum  Perfil {
     GESTOR_SISTEMA(34,"ROLE_ADMIN"),
-    DIRETOR_LIGA(36, "ROLE_DTL"),
-    DIRETOR_EQUIPE(38,"ROLE_DTE");
+    DIRETOR_LIGA(36, "ROLE_CLIENTE"),
+    DIRETOR_EQUIPE(38,"ROLE_TECNICO");
 
     private Integer codigo;
 

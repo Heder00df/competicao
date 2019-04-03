@@ -14,13 +14,12 @@ import lombok.Setter;
 public class Pessoa implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String nome;
-	private String email;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_endereco")
 	private Endereco endereco;
 	
-
+	private String email;
 
 
 }

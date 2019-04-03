@@ -6,7 +6,10 @@ import sun.plugin.javascript.navig.LinkArray;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -27,12 +30,15 @@ public class Competicao implements Serializable {
     @JoinColumn(name = "id_liga")
     private Liga liga;
 
-    @OneToMany(mappedBy = "competicao", cascade = CascadeType.ALL)
-    private List<CompeticaoEquipe> competicaoEquipes;
+    @OneToMany(mappedBy = "id.competicao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<CompeticaoCategoria>  competicoesCategorias = new HashSet<>();
+
+    @Enumerated(EnumType.STRING )
+    @Column(name = "tipo_campeonato")
+    private TipoCompeticao tipoCompeticao;
 
     @OneToMany(mappedBy = "competicao", cascade = CascadeType.ALL)
     private List<Fase> fases;
-
 
 
 }

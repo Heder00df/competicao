@@ -2,7 +2,6 @@ package com.br.egt.entidade;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,15 +21,9 @@ public class Telefone implements Serializable {
 
 	private Long numero;
 
-	@JsonIgnore
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "id_atleta")
 	private Atleta atleta;
-
-	public Telefone(){};
-
-	public Telefone(Long numero, Atleta atleta) {
-		this.numero = numero;
-		this.atleta = atleta;
-	}
+	
 }

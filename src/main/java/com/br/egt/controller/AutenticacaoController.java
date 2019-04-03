@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AutenticacaoController {
-    @PostMapping("/auth")
+    @PostMapping("/auth/login")
     public ResponseEntity<UsuarioAutenticado> autenticar(@RequestBody DadosAutenticacao dadosAutenticacao  )
     {
 
