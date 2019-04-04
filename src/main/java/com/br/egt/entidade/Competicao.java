@@ -37,6 +37,9 @@ public class Competicao implements Serializable {
     @Column(name = "tipo_campeonato")
     private TipoCompeticao tipoCompeticao;
 
+    @OneToMany(mappedBy = "id.competicao", fetch = FetchType.EAGER)
+    private Set<Time> times = new HashSet<>();
+
     @OneToMany(mappedBy = "competicao", cascade = CascadeType.ALL)
     private List<Fase> fases;
 

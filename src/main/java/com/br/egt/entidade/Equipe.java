@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,8 +24,8 @@ public class Equipe implements Serializable {
     @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
     private List<EquipeAtleta> equipeAtletas;
 
-    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
-    private List<CompeticaoEquipe> competicoesEquipe;
+    @OneToMany(mappedBy = "id.equipe", cascade = CascadeType.ALL)
+    private List<Time> times = new ArrayList<>();
 
 
 

@@ -3,13 +3,13 @@ package com.br.egt;
 import com.br.egt.entidade.*;
 import com.br.egt.repositories.CategoriaRepository;
 import com.br.egt.repositories.CompeticaoRepository;
+import com.br.egt.repositories.EquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.*;
-import java.util.stream.Collector;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -19,6 +19,9 @@ public class EGestaoApplication implements CommandLineRunner {
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+
+	@Autowired
+	private EquipeRepository equipeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EGestaoApplication.class, args);
@@ -54,16 +57,31 @@ public class EGestaoApplication implements CommandLineRunner {
 
 		//Amador adulto 1 divisao
 		Competicao amadaorPrimeiraDivisao = new Competicao();
-		CompeticaoCategoriaPK pk = new CompeticaoCategoriaPK();
-		pk.setCategoria(categoriaAdulto);
-		pk.setCompeticao(amadaorPrimeiraDivisao);
-		pk.setTemporada(2018);
+		CompeticaoCategoriaPK pkPrimeira = new CompeticaoCategoriaPK();
+		pkPrimeira.setCategoria(categoriaAdulto);
+		pkPrimeira.setCompeticao(amadaorPrimeiraDivisao);
+		pkPrimeira.setTemporada(2018);
 		CompeticaoCategoria competicaoCategoria = new CompeticaoCategoria();
-		competicaoCategoria.setId(pk);
-		amadaorPrimeiraDivisao.setNome("Campeonato Amador de Samambaia 2019");
-		amadaorPrimeiraDivisao.setTipoCompeticao(TipoCompeticao.PRIMEIRA_DIVISAO_LUFAS);
+		competicaoCategoria.setId(pkPrimeira);
+		amadaorPrimeiraDivisao.setNome("Campeonato Amador de Samambaia 2018");
+		amadaorPrimeiraDivisao.setTipoCompeticao(TipoCompeticao.PRIMEIRA_DIVISAO);
 		amadaorPrimeiraDivisao.getCompeticoesCategorias().add(competicaoCategoria);
 		competicaoRepository.save(amadaorPrimeiraDivisao);
+
+		Competicao amadaorPrimeiraDivisao2019 = new Competicao();
+		CompeticaoCategoriaPK pk = new CompeticaoCategoriaPK();
+		pk.setCategoria(categoriaAdulto);
+		pk.setCompeticao(amadaorPrimeiraDivisao2019);
+		pk.setTemporada(2019);
+		CompeticaoCategoria competicaoCategoria2019 = new CompeticaoCategoria();
+		competicaoCategoria2019.setId(pk);
+		amadaorPrimeiraDivisao2019.setNome("Campeonato Amador de Samambaia 2019");
+		amadaorPrimeiraDivisao2019.setTipoCompeticao(TipoCompeticao.PRIMEIRA_DIVISAO);
+		amadaorPrimeiraDivisao2019.getCompeticoesCategorias().add(competicaoCategoria2019);
+		competicaoRepository.save(amadaorPrimeiraDivisao2019);
+
+
+
 
 		//Amador adulto 2 divisao
 		Competicao amadaorSegundaDivisao = new Competicao();
@@ -74,8 +92,8 @@ public class EGestaoApplication implements CommandLineRunner {
 		CompeticaoCategoria competicaoCategoriaSegunda = new CompeticaoCategoria();
 		competicaoCategoriaSegunda.setId(pksegunda);
 
-		amadaorSegundaDivisao.setNome("Campeonato Amador de Samambaia 2019");
-		amadaorSegundaDivisao.setTipoCompeticao(TipoCompeticao.SEGUNDA_DIVISAO_LUFAS);
+		amadaorSegundaDivisao.setNome("Campeonato Amador de Samambaia 2018");
+		amadaorSegundaDivisao.setTipoCompeticao(TipoCompeticao.SEGUNDA_DIVISAO);
 		amadaorSegundaDivisao.getCompeticoesCategorias().add(competicaoCategoriaSegunda);
 		competicaoRepository.save(amadaorSegundaDivisao);
 
@@ -88,7 +106,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		CompeticaoCategoria competicaoCategoriaSegunda2019 = new CompeticaoCategoria();
 		competicaoCategoriaSegunda2019.setId(pksegunda2019);
 		amadaor2019.setNome("Campeonato Amador de Samambaia 2019");
-		amadaor2019.setTipoCompeticao(TipoCompeticao.SEGUNDA_DIVISAO_LUFAS);
+		amadaor2019.setTipoCompeticao(TipoCompeticao.SEGUNDA_DIVISAO);
 		amadaor2019.getCompeticoesCategorias().add(competicaoCategoriaSegunda2019);
 		competicaoRepository.save(amadaor2019);
 
@@ -103,9 +121,43 @@ public class EGestaoApplication implements CommandLineRunner {
 		CompeticaoCategoria competicaoCategoriaJuvenil = new CompeticaoCategoria();
 		competicaoCategoriaJuvenil.setId(pkJuvenil);
 		juvenilCompeticao.setNome("Campeonato juvevil de Samambaia 2018");
-		juvenilCompeticao.setTipoCompeticao(TipoCompeticao.BASE_LUFAS);
+		juvenilCompeticao.setTipoCompeticao(TipoCompeticao.BASE);
 		juvenilCompeticao.getCompeticoesCategorias().add(competicaoCategoriaJuvenil);
 		competicaoRepository.save(juvenilCompeticao);
+
+
+		Equipe panelinha = new Equipe();
+		panelinha.setDescricao("Panelinha Futebol Clube");
+
+		Time timePanelinha2018 = new Time();
+		timePanelinha2018.getId().setCompeticao(amadaorSegundaDivisao);
+		timePanelinha2018.getId().setEquipe(panelinha);
+		panelinha.getTimes().add(timePanelinha2018);
+
+		Time timePanelinha2019 = new Time();
+		timePanelinha2019.getId().setCompeticao(amadaorPrimeiraDivisao);
+		timePanelinha2019.getId().setEquipe(panelinha);
+		panelinha.getTimes().add(timePanelinha2019);
+
+
+		equipeRepository.save(panelinha);
+
+
+		Equipe mafia = new Equipe();
+		mafia.setDescricao("Mafia Futebol Clube");
+
+		Time timeMafia2018 = new Time();
+		timeMafia2018.getId().setCompeticao(amadaorPrimeiraDivisao);
+		timeMafia2018.getId().setEquipe(mafia);
+		mafia.getTimes().add(timeMafia2018);
+
+		Time timemafia2019 = new Time();
+		timemafia2019.getId().setCompeticao(amadaorPrimeiraDivisao2019);
+		timemafia2019.getId().setEquipe(mafia);
+
+		mafia.getTimes().add(timemafia2019);
+
+		equipeRepository.save(mafia);
 
 
 		List<Competicao> competicoes = competicaoRepository.findAll();
