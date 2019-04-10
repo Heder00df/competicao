@@ -16,13 +16,12 @@ public class Equipe implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_equipe")
     private Long id;
 
     private  String descricao;
 
     @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
-    private List<EquipeAtleta> equipeAtletas;
+    private List<Atleta> atletas = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.equipe", cascade = CascadeType.ALL)
     private List<Time> times = new ArrayList<>();

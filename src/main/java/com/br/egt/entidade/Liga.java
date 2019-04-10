@@ -15,7 +15,6 @@ public class Liga implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_liga")
     private Long id;
 
     private String nome;

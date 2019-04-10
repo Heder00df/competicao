@@ -10,7 +10,6 @@ public class Campo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_compo")
     private Long id;
 
     private String nome;

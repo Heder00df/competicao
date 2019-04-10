@@ -19,7 +19,6 @@ public class Competicao implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_competicao")
     private Long id;
 
     private String nome;

@@ -16,7 +16,6 @@ public class Telefone implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="id_telefone")
 	private Long id;
 
 	private Long numero;
