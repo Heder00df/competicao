@@ -16,4 +16,7 @@ public class Time implements Serializable {
     @EmbeddedId
     TimePk id = new TimePk();
 
+    @OneToOne
+    private Classificacao classificacao;
+
 }
