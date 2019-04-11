@@ -7,8 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.sql.Time;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,16 +20,18 @@ public class Atleta extends PessoaFisica implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_atleta")
 	private Long id;
 	private String posicao;
 
-	@JsonBackReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atleta")
-	private List<EquipeAtleta> equipe;
+	@ManyToOne
+	@JoinColumn(name = "id_equipe")
+	private Equipe equipe;
+
+	@ManyToMany(mappedBy = "atletas" , fetch = FetchType.EAGER)
+	private Set<Time> times = new HashSet<>();
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "atleta", cascade = CascadeType.ALL)
-	private List<Telefone> telefones;
+	private List<Telefone> telefones = new ArrayList<>();
 
 }

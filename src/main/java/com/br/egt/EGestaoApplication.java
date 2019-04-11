@@ -1,14 +1,13 @@
 package com.br.egt;
 
 import com.br.egt.entidade.*;
-import com.br.egt.repositories.CategoriaRepository;
-import com.br.egt.repositories.CompeticaoRepository;
-import com.br.egt.repositories.EquipeRepository;
+import com.br.egt.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,10 +17,16 @@ public class EGestaoApplication implements CommandLineRunner {
 	private CompeticaoRepository competicaoRepository;
 
 	@Autowired
+	private TimeRepository timeRepository;
+
+	@Autowired
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
 	private EquipeRepository equipeRepository;
+
+	@Autowired
+    private AtletaRepository atletaRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EGestaoApplication.class, args);
@@ -80,9 +85,6 @@ public class EGestaoApplication implements CommandLineRunner {
 		amadaorPrimeiraDivisao2019.getCompeticoesCategorias().add(competicaoCategoria2019);
 		competicaoRepository.save(amadaorPrimeiraDivisao2019);
 
-
-
-
 		//Amador adulto 2 divisao
 		Competicao amadaorSegundaDivisao = new Competicao();
 		CompeticaoCategoriaPK pksegunda = new CompeticaoCategoriaPK();
@@ -110,8 +112,6 @@ public class EGestaoApplication implements CommandLineRunner {
 		amadaor2019.getCompeticoesCategorias().add(competicaoCategoriaSegunda2019);
 		competicaoRepository.save(amadaor2019);
 
-
-
 		//Amador adulto 2 divisao
 		Competicao juvenilCompeticao = new Competicao();
 		CompeticaoCategoriaPK pkJuvenil = new CompeticaoCategoriaPK();
@@ -125,39 +125,34 @@ public class EGestaoApplication implements CommandLineRunner {
 		juvenilCompeticao.getCompeticoesCategorias().add(competicaoCategoriaJuvenil);
 		competicaoRepository.save(juvenilCompeticao);
 
-
 		Equipe panelinha = new Equipe();
 		panelinha.setDescricao("Panelinha Futebol Clube");
 
 		Time timePanelinha2018 = new Time();
-		timePanelinha2018.getId().setCompeticao(amadaorSegundaDivisao);
-		timePanelinha2018.getId().setEquipe(panelinha);
+		timePanelinha2018.setCompeticao(amadaorSegundaDivisao);
+		timePanelinha2018.setEquipe(panelinha);
 		panelinha.getTimes().add(timePanelinha2018);
 
 		Time timePanelinha2019 = new Time();
-		timePanelinha2019.getId().setCompeticao(amadaorPrimeiraDivisao);
-		timePanelinha2019.getId().setEquipe(panelinha);
+		timePanelinha2019.setCompeticao(amadaorPrimeiraDivisao);
+		timePanelinha2019.setEquipe(panelinha);
 		panelinha.getTimes().add(timePanelinha2019);
 
-
-		equipeRepository.save(panelinha);
 
 
 		Equipe mafia = new Equipe();
 		mafia.setDescricao("Mafia Futebol Clube");
 
 		Time timeMafia2018 = new Time();
-		timeMafia2018.getId().setCompeticao(amadaorPrimeiraDivisao);
-		timeMafia2018.getId().setEquipe(mafia);
+		timeMafia2018.setCompeticao(amadaorPrimeiraDivisao);
+		timeMafia2018.setEquipe(mafia);
 		mafia.getTimes().add(timeMafia2018);
 
 		Time timemafia2019 = new Time();
-		timemafia2019.getId().setCompeticao(amadaorPrimeiraDivisao2019);
-		timemafia2019.getId().setEquipe(mafia);
+		timemafia2019.setCompeticao(amadaorPrimeiraDivisao2019);
+		timemafia2019.setEquipe(mafia);
 
 		mafia.getTimes().add(timemafia2019);
-
-		equipeRepository.save(mafia);
 
 
 		List<Competicao> competicoes = competicaoRepository.findAll();
@@ -165,6 +160,46 @@ public class EGestaoApplication implements CommandLineRunner {
 		categorias.forEach(c-> System.out.println(c.getNome()));
 		categorias.size();
 
+
+		Endereco endereco = new Endereco();
+		endereco.setLogradouro("Novo endereco sdfdf");
+		endereco.setComplemento("Apartamento");
+		endereco.setNumero(304L);
+
+		Endereco endereco1 = new Endereco();
+		endereco1.setLogradouro("Endereco 2");
+		endereco1.setComplemento("Casa");
+		endereco1.setNumero(8L);
+
+		Telefone celular = new Telefone();
+		celular.setNumero(33589316L);
+
+		Telefone fixo = new Telefone();
+		fixo.setNumero(999342035L);
+
+
+		Atleta heder = new Atleta();
+		heder.setEndereco(endereco);
+		heder.getTelefones().add(fixo);
+		fixo.setAtleta(heder);
+		heder.setCpf(69638969172L);
+		heder.setPosicao("Lateral");
+		heder.setDataNascimento(LocalDate.of(1981,10,18));
+		heder.setRg(1895541L);
+		heder.setEmail("heder00df@gmail.com");
+		heder.setEquipe(panelinha);
+		equipeRepository.save(panelinha);
+		equipeRepository.save(mafia);
+		atletaRepository.save(heder);
+
+		panelinha.getAtletas().add(heder);
+		Atleta a = atletaRepository.findById(heder.getId()).get();
+		a.getTimes().add(timePanelinha2018);
+		a.getTimes().add(timePanelinha2019);
+		timePanelinha2018.getAtletas().add(a);
+		timePanelinha2019.getAtletas().add(a);
+		timeRepository.save(timePanelinha2018);
+		timeRepository.save(timePanelinha2019);
 
 
 

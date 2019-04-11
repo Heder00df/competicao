@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -13,10 +16,25 @@ public class Time implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    TimePk id = new TimePk();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @OneToOne
-    private Classificacao classificacao;
+    @ManyToOne
+    @JoinColumn(name = "id_competicao")
+    private Competicao competicao;
 
+    @ManyToOne
+    @JoinColumn(name = "id_equipe")
+    private Equipe equipe;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "time_atleta",
+            joinColumns = { @JoinColumn(name = "id_time") },
+            inverseJoinColumns = { @JoinColumn(name = "id_atleta") }
+    )
+    private Set<Atleta> atletas = new HashSet<>();
+
+    
 }

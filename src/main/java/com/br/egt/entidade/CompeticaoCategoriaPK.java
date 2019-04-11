@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Getter
 public class CompeticaoCategoriaPK implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @ManyToOne
     @JoinColumn(name = "id_competicao")
     private Competicao competicao;
