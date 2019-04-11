@@ -27,6 +27,9 @@ public class Atleta extends PessoaFisica implements Serializable {
 	@JoinColumn(name = "id_equipe")
 	private Equipe equipe;
 
+	@ManyToMany(mappedBy = "atletas" , fetch = FetchType.EAGER)
+	private Set<Time> times = new HashSet<>();
+
 	@JsonBackReference
 	@OneToMany(mappedBy = "atleta", cascade = CascadeType.ALL)
 	private List<Telefone> telefones = new ArrayList<>();

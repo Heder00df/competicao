@@ -23,7 +23,7 @@ public class Equipe implements Serializable {
     @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL)
     private List<Atleta> atletas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "id.equipe", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "equipe")
     private List<Time> times = new ArrayList<>();
 
 

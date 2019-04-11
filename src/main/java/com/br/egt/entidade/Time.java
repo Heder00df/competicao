@@ -16,8 +16,17 @@ public class Time implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @EmbeddedId
-    TimePk id = new TimePk();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_competicao")
+    private Competicao competicao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_equipe")
+    private Equipe equipe;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -25,7 +34,7 @@ public class Time implements Serializable {
             joinColumns = { @JoinColumn(name = "id_time") },
             inverseJoinColumns = { @JoinColumn(name = "id_atleta") }
     )
-    Set<Atleta> atletas = new HashSet<>();
+    private Set<Atleta> atletas = new HashSet<>();
 
     
 }
