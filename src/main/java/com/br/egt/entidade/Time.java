@@ -28,7 +28,7 @@ public class Time implements Serializable {
     @JoinColumn(name = "id_equipe")
     private Equipe equipe;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany
     @JoinTable(
             name = "time_atleta",
             joinColumns = { @JoinColumn(name = "id_time") },
