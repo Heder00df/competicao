@@ -1,12 +1,30 @@
 package com.br.egt.entidade;
 
-import org.hibernate.annotations.Entity;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Classificacao {
+@Setter
+@Getter
+public class Classificacao implements Serializable {
 
-    private Long ic;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "time_id")
+    private Time time;
 
     private Integer pontos;
+
     private Integer vitorias;
+
+    private Integer derrotas;
+
+    private Integer empates;
 }

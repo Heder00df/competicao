@@ -20,6 +20,9 @@ public class EGestaoApplication implements CommandLineRunner {
 	private TimeRepository timeRepository;
 
 	@Autowired
+	private ClassificacaoRepository classificacaoRepository;
+
+	@Autowired
 	private CategoriaRepository categoriaRepository;
 
 	@Autowired
@@ -200,7 +203,34 @@ public class EGestaoApplication implements CommandLineRunner {
 		timePanelinha2019.getAtletas().add(a);
 		timeRepository.save(timePanelinha2018);
 		timeRepository.save(timePanelinha2019);
+		timeRepository.save(timemafia2019);
+		timeRepository.save(timeMafia2018);
 
+
+		Classificacao c1 = new Classificacao();
+		c1.setDerrotas(3);
+		c1.setEmpates(2);
+		c1.setVitorias(5);
+		c1.setPontos(17);
+		c1.setTime(timePanelinha2018);
+		classificacaoRepository.save(c1);
+
+		Classificacao c2 = new Classificacao();
+		c2.setDerrotas(4);
+		c2.setEmpates(3);
+		c2.setVitorias(3);
+		c2.setPontos(15);
+		c2.setTime(timePanelinha2019);
+		classificacaoRepository.save(c2);
+
+		Classificacao c3 = new Classificacao();
+		c3.setDerrotas(4);
+		c3.setEmpates(3);
+		c3.setVitorias(3);
+		c3.setPontos(15);
+		c3.setTime(timemafia2019);
+
+		classificacaoRepository.save(c3);
 
 
 	}

@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -28,7 +27,7 @@ public class Time implements Serializable {
     @JoinColumn(name = "id_equipe")
     private Equipe equipe;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany
     @JoinTable(
             name = "time_atleta",
             joinColumns = { @JoinColumn(name = "id_time") },
