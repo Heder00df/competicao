@@ -128,27 +128,47 @@ public class EGestaoApplication implements CommandLineRunner {
 		juvenilCompeticao.getCompeticoesCategorias().add(competicaoCategoriaJuvenil);
 		competicaoRepository.save(juvenilCompeticao);
 
-		Equipe equipePanelinha = new Equipe();
-		equipePanelinha.setDescricao("Panelinha Futebol Clube");
-		equipeRepository.save(equipePanelinha);
+		Equipe panelinha = new Equipe();
+		panelinha.setDescricao("Panelinha Futebol Clube");
+
+		Time timePanelinha2018 = new Time();
+		timePanelinha2018.setCompeticao(amadaorSegundaDivisao);
+		timePanelinha2018.setEquipe(panelinha);
+		panelinha.getTimes().add(timePanelinha2018);
+
+		Time timePanelinha2019 = new Time();
+		timePanelinha2019.setCompeticao(amadaorPrimeiraDivisao);
+		timePanelinha2019.setEquipe(panelinha);
+		panelinha.getTimes().add(timePanelinha2019);
+
+		Equipe equipeReal = new Equipe();
+		panelinha.setDescricao("Real Esporte Clube");
+
+		Time timeReal2018 = new Time();
+		timeReal2018.setCompeticao(amadaorPrimeiraDivisao);
+		timeReal2018.setEquipe(equipeReal);
+		panelinha.getTimes().add(timeReal2018);
+
+		Time timeReal2019 = new Time();
+		timeReal2019.setCompeticao(amadaorPrimeiraDivisao);
+		timeReal2019.setEquipe(panelinha);
+		panelinha.getTimes().add(timeReal2019);
 
 
 
-
-		Equipe equipeMafia = new Equipe();
-		equipeMafia.setDescricao("Mafia Futebol Clube");
+		Equipe mafia = new Equipe();
+		mafia.setDescricao("Mafia Futebol Clube");
 
 		Time timeMafia2018 = new Time();
 		timeMafia2018.setCompeticao(amadaorPrimeiraDivisao);
-		timeMafia2018.setEquipe(equipeMafia);
-		equipeMafia.getTimes().add(timeMafia2018);
+		timeMafia2018.setEquipe(mafia);
+		mafia.getTimes().add(timeMafia2018);
 
 		Time timemafia2019 = new Time();
 		timemafia2019.setCompeticao(amadaorPrimeiraDivisao2019);
-		timemafia2019.setEquipe(equipeMafia);
-		equipeRepository.save(equipeMafia);
+		timemafia2019.setEquipe(mafia);
 
-		equipeMafia.getTimes().add(timemafia2019);
+		mafia.getTimes().add(timemafia2019);
 
 
 		List<Competicao> competicoes = competicaoRepository.findAll();
@@ -183,49 +203,50 @@ public class EGestaoApplication implements CommandLineRunner {
 		heder.setDataNascimento(LocalDate.of(1981,10,18));
 		heder.setRg(1895541L);
 		heder.setEmail("heder00df@gmail.com");
-		heder.setEquipe(equipePanelinha);
-
-
-		Time timePanelinha2018 = new Time();
-		timePanelinha2018.setCompeticao(amadaorSegundaDivisao);
-		timePanelinha2018.setEquipe(equipePanelinha);
-		equipePanelinha.getTimes().add(timePanelinha2018);
-
-		Time timePanelinha2019 = new Time();
-		timePanelinha2019.setCompeticao(amadaorPrimeiraDivisao);
-		timePanelinha2019.setEquipe(equipePanelinha);
-		equipePanelinha.getTimes().add(timePanelinha2019);
-		heder.getTimes().add(timePanelinha2018);
-		heder.getTimes().add(timePanelinha2019);
-
-		timePanelinha2018.getAtletas().add(heder);
-		timePanelinha2019.getAtletas().add(heder);
-
+		heder.setEquipe(panelinha);
+		equipeRepository.save(panelinha);
+		equipeRepository.save(mafia);
+		equipeRepository.save(equipeReal);
 		atletaRepository.save(heder);
 
-		equipePanelinha.getAtletas().add(heder);
-
+		panelinha.getAtletas().add(heder);
+		Atleta a = atletaRepository.findById(heder.getId()).get();
+		a.getTimes().add(timePanelinha2018);
+		a.getTimes().add(timePanelinha2019);
+		timePanelinha2018.getAtletas().add(a);
+		timePanelinha2019.getAtletas().add(a);
 		timeRepository.save(timePanelinha2018);
 		timeRepository.save(timePanelinha2019);
+		timeRepository.save(timemafia2019);
+		timeRepository.save(timeMafia2018);
 
-		Classificacao classificacao = new Classificacao();
-		//classificacao.setCompeticao(amadaor2019);
-		classificacao.setTime(timePanelinha2019);
-		classificacao.setDerrotas(4);
-		classificacao.setEmpates(1);
-		classificacao.setVitorias(4);
-		//classificacaoRepository.save(classificacao);
 
+		Classificacao c1 = new Classificacao();
+		c1.setDerrotas(3);
+		c1.setEmpates(2);
+		c1.setVitorias(5);
+		c1.setPontos(17);
+		c1.setTime(timePanelinha2018);
+		c1.setCompeticao(amadaorSegundaDivisao);
+		classificacaoRepository.save(c1);
 
 		Classificacao c2 = new Classificacao();
-		//c2.setCompeticao(amadaor2019);
-		c2.setTime(timemafia2019);
-		c2.setDerrotas(2);
-		c2.setEmpates(2);
-		c2.setVitorias(5);
-		//classificacaoRepository.save(c2);
+		c2.setDerrotas(4);
+		c2.setEmpates(3);
+		c2.setVitorias(3);
+		c2.setPontos(12);
+		c2.setTime(timePanelinha2019);
+		c2.setCompeticao(amadaorPrimeiraDivisao2019);
+		classificacaoRepository.save(c2);
 
-
+		Classificacao c3 = new Classificacao();
+		c3.setDerrotas(3);
+		c3.setEmpates(3);
+		c3.setVitorias(4);
+		c3.setPontos(15);
+		c3.setTime(timemafia2019);
+		c3.setCompeticao(amadaorPrimeiraDivisao2019);
+		classificacaoRepository.save(c3);
 
 
 	}

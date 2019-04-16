@@ -20,6 +20,7 @@ public class Jogo implements Serializable {
     private LocalDate data;
 
     private Integer rodada;
+    
     @ManyToOne
     @JoinColumn(name = "id_campo")
     private Campo campo;
@@ -28,23 +29,23 @@ public class Jogo implements Serializable {
 
     public Jogo(){}
 
-    public Jogo(Equipe mandante, Equipe visitante, Integer rodada){
+    public Jogo(Time mandante, Time visitante, Integer rodada){
         setMandante(mandante);
         setVisitante(visitante);
         setRodada(rodada);
     }
 
 
-    public Equipe getVisitante(){
+    public Time getVisitante(){
         return pk.getVisitante();
     }
-    public Equipe getMandante(){
+    public Time getMandante(){
         return pk.getMandante();
     }
-    public void setVisitante(Equipe visitante){
+    public void setVisitante(Time visitante){
         pk.setVisitante(visitante);
     }
-    public void setMandante(Equipe mandante){
+    public void setMandante(Time mandante){
         pk.setMandante(mandante);
     }
 
