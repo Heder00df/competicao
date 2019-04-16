@@ -1,9 +1,6 @@
 package com.br.egt.service;
 
-import com.br.egt.entidade.Atleta;
 import com.br.egt.entidade.Equipe;
-import com.br.egt.entidade.dtos.AtletaDto;
-import com.br.egt.repositories.AtletaRepository;
 import com.br.egt.repositories.EquipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

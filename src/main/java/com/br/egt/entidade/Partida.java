@@ -16,16 +16,16 @@ public class Partida implements Serializable {
     @EmbeddedId
     private JogoPK pk;
 
-    public Equipe getVisitante(){
+    public Time getVisitante(){
         return pk.getVisitante();
     }
-    public Equipe getMandante(){
+    public Time getMandante(){
         return pk.getMandante();
     }
-    public void setVisitante(Equipe visitante){
+    public void setVisitante(Time visitante){
         pk.setVisitante(visitante);
     }
-    public void setMandante(Equipe mandante){
+    public void setMandante(Time mandante){
         pk.setMandante(mandante);
     }
 

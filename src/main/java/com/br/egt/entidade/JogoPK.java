@@ -16,10 +16,10 @@ public class JogoPK implements Serializable {
     public JogoPK(){}
     @ManyToOne
     @JoinColumn(name = "visitante_id")
-    private Equipe visitante;
+    private Time visitante;
     @ManyToOne
     @JoinColumn(name = "mandate_id")
-    private Equipe mandante;
+    private Time mandante;
 
 
     @Override

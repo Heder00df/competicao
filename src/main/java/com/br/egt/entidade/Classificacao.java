@@ -20,6 +20,10 @@ public class Classificacao implements Serializable {
     @JoinColumn(name = "time_id")
     private Time time;
 
+    @ManyToOne
+    @JoinColumn(name = "competicao_id")
+    private Competicao competicao;
+
     private Integer pontos;
 
     private Integer vitorias;

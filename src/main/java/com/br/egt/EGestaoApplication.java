@@ -141,6 +141,19 @@ public class EGestaoApplication implements CommandLineRunner {
 		timePanelinha2019.setEquipe(panelinha);
 		panelinha.getTimes().add(timePanelinha2019);
 
+		Equipe equipeReal = new Equipe();
+		panelinha.setDescricao("Real Esporte Clube");
+
+		Time timeReal2018 = new Time();
+		timeReal2018.setCompeticao(amadaorPrimeiraDivisao);
+		timeReal2018.setEquipe(equipeReal);
+		panelinha.getTimes().add(timeReal2018);
+
+		Time timeReal2019 = new Time();
+		timeReal2019.setCompeticao(amadaorPrimeiraDivisao);
+		timeReal2019.setEquipe(panelinha);
+		panelinha.getTimes().add(timeReal2019);
+
 
 
 		Equipe mafia = new Equipe();
@@ -193,6 +206,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		heder.setEquipe(panelinha);
 		equipeRepository.save(panelinha);
 		equipeRepository.save(mafia);
+		equipeRepository.save(equipeReal);
 		atletaRepository.save(heder);
 
 		panelinha.getAtletas().add(heder);
@@ -213,23 +227,25 @@ public class EGestaoApplication implements CommandLineRunner {
 		c1.setVitorias(5);
 		c1.setPontos(17);
 		c1.setTime(timePanelinha2018);
+		c1.setCompeticao(amadaorSegundaDivisao);
 		classificacaoRepository.save(c1);
 
 		Classificacao c2 = new Classificacao();
 		c2.setDerrotas(4);
 		c2.setEmpates(3);
 		c2.setVitorias(3);
-		c2.setPontos(15);
+		c2.setPontos(12);
 		c2.setTime(timePanelinha2019);
+		c2.setCompeticao(amadaorPrimeiraDivisao2019);
 		classificacaoRepository.save(c2);
 
 		Classificacao c3 = new Classificacao();
-		c3.setDerrotas(4);
+		c3.setDerrotas(3);
 		c3.setEmpates(3);
-		c3.setVitorias(3);
+		c3.setVitorias(4);
 		c3.setPontos(15);
 		c3.setTime(timemafia2019);
-
+		c3.setCompeticao(amadaorPrimeiraDivisao2019);
 		classificacaoRepository.save(c3);
 
 
