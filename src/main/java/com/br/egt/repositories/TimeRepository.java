@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface TimeRepository extends JpaRepository<Time, Long> {
 
-    @Query("SELECT t FROM Time t WHERE t.competicao.id= : codigoCompeticao")
-    List<Time> recuperarTimesPorCompeticao(@Param("codigoCompeticao") Long codigoCompeticao);
+    @Query("SELECT t FROM Time t WHERE t.competicao.id= :codigo")
+    List<Time> recuperarTimesPorCompeticao(@Param("codigo") Long codigo);
 
 }

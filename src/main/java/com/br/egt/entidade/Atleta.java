@@ -24,7 +24,7 @@ public class Atleta extends PessoaFisica implements Serializable {
 	private String posicao;
 
 	@ManyToOne
-	@JoinColumn(name = "id_equipe")
+	@JoinColumn(name = "equipe_id")
 	private Equipe equipe;
 
 	@ManyToMany(mappedBy = "atletas")

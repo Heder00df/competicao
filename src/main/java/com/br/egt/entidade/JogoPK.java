@@ -17,6 +17,7 @@ public class JogoPK implements Serializable {
     @ManyToOne
     @JoinColumn(name = "visitante_id")
     private Time visitante;
+
     @ManyToOne
     @JoinColumn(name = "mandate_id")
     private Time mandante;

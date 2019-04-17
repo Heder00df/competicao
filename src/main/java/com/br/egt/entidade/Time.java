@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -26,6 +27,8 @@ public class Time implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_equipe")
     private Equipe equipe;
+
+    private List<Jogo> jogos;
 
     @ManyToMany
     @JoinTable(

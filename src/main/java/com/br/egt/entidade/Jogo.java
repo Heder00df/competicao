@@ -26,7 +26,6 @@ public class Jogo implements Serializable {
     private Campo campo;
 
 
-
     public Jogo(){}
 
     public Jogo(Time mandante, Time visitante, Integer rodada){
