@@ -2,6 +2,8 @@ package com.br.egt;
 
 import com.br.egt.entidade.*;
 import com.br.egt.repositories.*;
+import com.br.egt.service.JogoService;
+import com.br.egt.service.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +32,9 @@ public class EGestaoApplication implements CommandLineRunner {
 
 	@Autowired
     private AtletaRepository atletaRepository;
+
+	@Autowired
+	private JogoService jogoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EGestaoApplication.class, args);
@@ -137,22 +142,36 @@ public class EGestaoApplication implements CommandLineRunner {
 		panelinha.getTimes().add(timePanelinha2018);
 
 		Time timePanelinha2019 = new Time();
-		timePanelinha2019.setCompeticao(amadaorPrimeiraDivisao);
+		timePanelinha2019.setCompeticao(amadaorPrimeiraDivisao2019);
 		timePanelinha2019.setEquipe(panelinha);
 		panelinha.getTimes().add(timePanelinha2019);
 
 		Equipe equipeReal = new Equipe();
-		panelinha.setDescricao("Real Esporte Clube");
+		equipeReal.setDescricao("Real Esporte Clube");
 
 		Time timeReal2018 = new Time();
 		timeReal2018.setCompeticao(amadaorPrimeiraDivisao);
 		timeReal2018.setEquipe(equipeReal);
-		panelinha.getTimes().add(timeReal2018);
+		equipeReal.getTimes().add(timeReal2018);
 
 		Time timeReal2019 = new Time();
-		timeReal2019.setCompeticao(amadaorPrimeiraDivisao);
-		timeReal2019.setEquipe(panelinha);
-		panelinha.getTimes().add(timeReal2019);
+		timeReal2019.setCompeticao(amadaorPrimeiraDivisao2019);
+		timeReal2019.setEquipe(equipeReal);
+		equipeReal.getTimes().add(timeReal2019);
+
+
+		Equipe equipeParma = new Equipe();
+		equipeParma.setDescricao("Parma");
+
+		Time timeParma2018 = new Time();
+		timeParma2018.setCompeticao(amadaorPrimeiraDivisao);
+		timeParma2018.setEquipe(equipeParma);
+		equipeParma.getTimes().add(timeParma2018);
+
+		Time timeParma2019 = new Time();
+		timeParma2019.setCompeticao(amadaorPrimeiraDivisao2019);
+		timeParma2019.setEquipe(equipeParma);
+		equipeParma.getTimes().add(timeParma2019);
 
 
 
@@ -205,20 +224,28 @@ public class EGestaoApplication implements CommandLineRunner {
 		heder.setEmail("heder00df@gmail.com");
 		heder.setEquipe(panelinha);
 		equipeRepository.save(panelinha);
+		equipeRepository.save(equipeParma);
 		equipeRepository.save(mafia);
 		equipeRepository.save(equipeReal);
 		atletaRepository.save(heder);
 
 		panelinha.getAtletas().add(heder);
-		Atleta a = atletaRepository.findById(heder.getId()).get();
-		a.getTimes().add(timePanelinha2018);
-		a.getTimes().add(timePanelinha2019);
-		timePanelinha2018.getAtletas().add(a);
-		timePanelinha2019.getAtletas().add(a);
+		heder.getTimes().add(timePanelinha2018);
+		heder.getTimes().add(timePanelinha2019);
+		timePanelinha2018.getAtletas().add(heder);
+		timePanelinha2019.getAtletas().add(heder);
+
 		timeRepository.save(timePanelinha2018);
 		timeRepository.save(timePanelinha2019);
+
 		timeRepository.save(timemafia2019);
 		timeRepository.save(timeMafia2018);
+
+		timeRepository.save(timeParma2018);
+		timeRepository.save(timeParma2019);
+
+		timeRepository.save(timeReal2018);
+		timeRepository.save(timeReal2019);
 
 
 		Classificacao c1 = new Classificacao();
@@ -247,6 +274,9 @@ public class EGestaoApplication implements CommandLineRunner {
 		c3.setTime(timemafia2019);
 		c3.setCompeticao(amadaorPrimeiraDivisao2019);
 		classificacaoRepository.save(c3);
+
+		List<Time> times = timeRepository.recuperarTimesPorCompeticao(2L);
+		jogoService.gerarPartidas(times);
 
 
 	}
