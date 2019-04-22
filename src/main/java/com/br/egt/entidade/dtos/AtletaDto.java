@@ -2,13 +2,13 @@ package com.br.egt.entidade.dtos;
 
 import com.br.egt.entidade.Atleta;
 import com.br.egt.entidade.EquipeAtleta;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-
-public class AtletaDto implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Getter
+public class AtletaDto {
     private Long cpf;
     private String nome;
     private LocalDate dataNascimento;

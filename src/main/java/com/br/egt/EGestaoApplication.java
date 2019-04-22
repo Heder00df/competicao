@@ -3,13 +3,14 @@ package com.br.egt;
 import com.br.egt.entidade.*;
 import com.br.egt.repositories.*;
 import com.br.egt.service.JogoService;
-import com.br.egt.service.TimeService;
+import com.br.egt.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,13 @@ public class EGestaoApplication implements CommandLineRunner {
 
 	@Autowired
 	private TimeRepository timeRepository;
+
+	@Autowired
+	private UsuarioService usuarioService;
+
+	@Autowired
+	private ClienteRepository clienteRepository;
+
 
 	@Autowired
 	private ClassificacaoRepository classificacaoRepository;
@@ -67,6 +75,30 @@ public class EGestaoApplication implements CommandLineRunner {
 		preMirim.setDescricao("Pre-mirim sub 11");
 		preMirim.setIdadeMaxima(11);
 		categoriaRepository.save(preMirim);
+
+		Cliente cliente = new Cliente();
+		cliente.setNome("Alexandre - LUFAS");
+		clienteRepository.save(cliente);
+
+
+		Usuario usuarioPanelinha = gerarUsuario("panelinha", cliente);
+		cliente.getUsuarios().add(usuarioPanelinha);
+
+		//Usuario mafia
+		Usuario usuarioMafia = gerarUsuario("mafia", cliente);
+		cliente.getUsuarios().add(usuarioMafia);
+		//usuarioService.salvarUsuario(usuarioMafia);
+
+		//Usuario real
+		Usuario usuarioReal = gerarUsuario("real", cliente);
+		cliente.getUsuarios().add(usuarioReal);
+		//usuarioService.salvarUsuario(usuarioReal);
+
+
+		//Usuario parma
+		Usuario usuarioParma = gerarUsuario("parma", cliente);
+		cliente.getUsuarios().add(usuarioParma);
+		//usuarioService.salvarUsuario(usuarioParma);
 
 		//Amador adulto 1 divisao
 		Competicao amadaorPrimeiraDivisao = new Competicao();
@@ -135,6 +167,7 @@ public class EGestaoApplication implements CommandLineRunner {
 
 		Equipe panelinha = new Equipe();
 		panelinha.setDescricao("Panelinha Futebol Clube");
+		panelinha.setUsuario(usuarioPanelinha);
 
 		Time timePanelinha2018 = new Time();
 		timePanelinha2018.setCompeticao(amadaorSegundaDivisao);
@@ -148,6 +181,7 @@ public class EGestaoApplication implements CommandLineRunner {
 
 		Equipe equipeReal = new Equipe();
 		equipeReal.setDescricao("Real Esporte Clube");
+		equipeReal.setUsuario(usuarioReal);
 
 		Time timeReal2018 = new Time();
 		timeReal2018.setCompeticao(amadaorPrimeiraDivisao);
@@ -162,6 +196,7 @@ public class EGestaoApplication implements CommandLineRunner {
 
 		Equipe equipeParma = new Equipe();
 		equipeParma.setDescricao("Parma");
+		equipeParma.setUsuario(usuarioParma);
 
 		Time timeParma2018 = new Time();
 		timeParma2018.setCompeticao(amadaorPrimeiraDivisao);
@@ -173,10 +208,9 @@ public class EGestaoApplication implements CommandLineRunner {
 		timeParma2019.setEquipe(equipeParma);
 		equipeParma.getTimes().add(timeParma2019);
 
-
-
 		Equipe mafia = new Equipe();
 		mafia.setDescricao("Mafia Futebol Clube");
+		mafia.setUsuario(usuarioMafia);
 
 		Time timeMafia2018 = new Time();
 		timeMafia2018.setCompeticao(amadaorPrimeiraDivisao);
@@ -223,11 +257,15 @@ public class EGestaoApplication implements CommandLineRunner {
 		heder.setRg(1895541L);
 		heder.setEmail("heder00df@gmail.com");
 		heder.setEquipe(panelinha);
+
+		//usuarioService.salvarUsuario(usuarioPanelinha);
 		equipeRepository.save(panelinha);
+
 		equipeRepository.save(equipeParma);
 		equipeRepository.save(mafia);
 		equipeRepository.save(equipeReal);
 		atletaRepository.save(heder);
+
 
 		panelinha.getAtletas().add(heder);
 		heder.getTimes().add(timePanelinha2018);
@@ -278,6 +316,29 @@ public class EGestaoApplication implements CommandLineRunner {
 		List<Time> times = timeRepository.recuperarTimesPorCompeticao(2L);
 		jogoService.gerarPartidas(times);
 
+		Time pa = timeRepository.findById(timePanelinha2019.getId()).get();
+
+
+		Usuario usuarioLiga = new Usuario();
+		usuarioLiga.setEmail("lufas@gmail.com.br");
+		usuarioLiga.setSenha("123@");
+		usuarioLiga.setLogin("lufas");
+		usuarioLiga.setCliente(cliente);
+		usuarioLiga.addPerfil(Perfil.DIRETOR_LIGA);
+
+		cliente.getUsuarios().add(usuarioLiga);
+		clienteRepository.save(cliente);
+		usuarioService.salvarUsuario(usuarioLiga);
+	}
+
+	private Usuario gerarUsuario(String nomeTime, Cliente cliente){
+		Usuario usuarioLiga = new Usuario();
+		usuarioLiga.setEmail(nomeTime+"@gmail.com.br");
+		usuarioLiga.setSenha("123@");
+		usuarioLiga.setLogin(nomeTime);
+		usuarioLiga.setCliente(cliente);
+		usuarioLiga.addPerfil(Perfil.DIRETOR_LIGA);
+		return usuarioLiga;
 
 	}
 }

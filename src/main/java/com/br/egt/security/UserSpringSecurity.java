@@ -1,7 +1,6 @@
 package com.br.egt.security;
 
 import com.br.egt.entidade.Perfil;
-import com.br.egt.entidade.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,19 +15,31 @@ public class UserSpringSecurity implements UserDetails {
     private String email;
     private String senha;
     private Collection<? extends GrantedAuthority> authorities;
+    private Long codigoCliente;
+    private Long codigoEquipe;
 
-    public UserSpringSecurity(Long id, String email, String senha, Set<Perfil> perfis) {
+    public UserSpringSecurity(Long id, String email, String senha, Set<Perfil> perfis, Long codigoCliente) {
         this.id = id;
         this.email = email;
         this.senha = senha;
         this.authorities = perfis.stream()
                 .map(p-> new SimpleGrantedAuthority(p.getDescricao()))
                 .collect(Collectors.toList());
+        this.codigoCliente = codigoCliente;
     }
 
     public Long getId(){
         return id;
     }
+
+    public Long getCodigoCliente() {
+        return codigoCliente;
+    }
+
+    public Long getCodigoEquipe() {
+        return codigoEquipe;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

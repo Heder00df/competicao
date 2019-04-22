@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -27,7 +29,13 @@ public class Time implements Serializable {
     @JoinColumn(name = "id_equipe")
     private Equipe equipe;
 
-    @ManyToMany
+    @OneToMany(mappedBy ="pk.visitante", fetch = FetchType.EAGER)
+    private List<Jogo> jogosVisitante = new ArrayList<>();
+
+    @OneToMany(mappedBy ="pk.mandante", fetch = FetchType.EAGER)
+    private List<Jogo> jogosMandante = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "time_atleta",
             joinColumns = { @JoinColumn(name = "id_time") },

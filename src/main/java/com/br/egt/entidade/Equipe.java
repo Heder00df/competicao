@@ -26,6 +26,16 @@ public class Equipe implements Serializable {
     @OneToMany(mappedBy = "equipe")
     private List<Time> times = new ArrayList<>();
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
+    public Equipe(String descricao, Long id) {
+        this.id = id;
+        this.descricao = descricao;
+    }
 
 
+    public Equipe() {
+    }
 }

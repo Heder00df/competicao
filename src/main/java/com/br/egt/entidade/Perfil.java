@@ -1,11 +1,5 @@
 package com.br.egt.entidade;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.Enumerated;
-import javax.swing.*;
-
 public enum  Perfil {
     GESTOR_SISTEMA(34,"ROLE_ADMIN"),
     DIRETOR_LIGA(36, "ROLE_CLIENTE"),
