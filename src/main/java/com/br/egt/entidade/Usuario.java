@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,7 +27,17 @@ public class Usuario {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable()
-    private Set<Integer> perfils;
+    private Set<Integer> perfils = new HashSet<>();
+
+    public Usuario(String email, Cliente cli, String senha) {
+        this.email = email;
+        this.cliente = cli;
+        this.senha=senha;
+    }
+
+    public Usuario() {
+
+    }
 
 
     public Set<Perfil> getPerfis(){

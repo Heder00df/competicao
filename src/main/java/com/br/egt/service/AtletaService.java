@@ -1,10 +1,8 @@
 package com.br.egt.service;
 
 import com.br.egt.entidade.Atleta;
-import com.br.egt.entidade.Telefone;
 import com.br.egt.entidade.dtos.AtletaDto;
 import com.br.egt.repositories.AtletaRepository;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +33,9 @@ public class AtletaService {
     }
 
 
-    public List<Atleta> recuperarAtletas() {
+    public List<AtletaDto> recuperarAtletas() {
         List<Atleta> atletas = rep.findAll();
-        return atletas;
+        return atletas.stream().map(a -> new AtletaDto(a)).collect(Collectors.toList());
     }
 
     public void excluirAtleta(Atleta atleta) {
