@@ -25,12 +25,17 @@ public class Competicao implements Serializable {
 
     private String premio;
 
+    private Integer temporada;
+
     @ManyToOne
     @JoinColumn(name = "id_liga")
     private Liga liga;
 
-    @OneToMany(mappedBy = "id.competicao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Set<CompeticaoCategoria>  competicoesCategorias = new HashSet<>();
+    /*@OneToMany(mappedBy = "id.competicao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<CompeticaoCategoria>  competicoesCategorias = new HashSet<>();*/
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
 
     @Enumerated(EnumType.STRING )
     @Column(name = "tipo_campeonato")

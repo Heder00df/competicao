@@ -6,6 +6,8 @@ import com.br.egt.service.CompeticaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/competicao")
 public class CompeticaoController {
@@ -19,8 +21,9 @@ public class CompeticaoController {
         return competicao;
     }
 
-    @GetMapping("competicoes")
+    @GetMapping("/competicoes")
     public List<CompeticaoDto> competicoes(){
+        return service.buscarTodasCompeticoes();
 
     }
 }

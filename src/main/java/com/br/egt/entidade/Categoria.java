@@ -21,5 +21,4 @@ public class Categoria implements Serializable {
 	private Integer idadeMaxima;
 
 
-
 }

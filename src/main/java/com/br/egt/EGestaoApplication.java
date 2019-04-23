@@ -102,67 +102,43 @@ public class EGestaoApplication implements CommandLineRunner {
 
 		//Amador adulto 1 divisao
 		Competicao amadaorPrimeiraDivisao = new Competicao();
-		CompeticaoCategoriaPK pkPrimeira = new CompeticaoCategoriaPK();
-		pkPrimeira.setCategoria(categoriaAdulto);
-		pkPrimeira.setCompeticao(amadaorPrimeiraDivisao);
-		pkPrimeira.setTemporada(2018);
-		CompeticaoCategoria competicaoCategoria = new CompeticaoCategoria();
-		competicaoCategoria.setId(pkPrimeira);
+
 		amadaorPrimeiraDivisao.setNome("Campeonato Amador de Samambaia 2018");
 		amadaorPrimeiraDivisao.setTipoCompeticao(TipoCompeticao.PRIMEIRA_DIVISAO);
-		amadaorPrimeiraDivisao.getCompeticoesCategorias().add(competicaoCategoria);
+		amadaorPrimeiraDivisao.setCategoria(categoriaAdulto);
+		amadaorPrimeiraDivisao.setTemporada(2018);
 		competicaoRepository.save(amadaorPrimeiraDivisao);
 
 		Competicao amadaorPrimeiraDivisao2019 = new Competicao();
-		CompeticaoCategoriaPK pk = new CompeticaoCategoriaPK();
-		pk.setCategoria(categoriaAdulto);
-		pk.setCompeticao(amadaorPrimeiraDivisao2019);
-		pk.setTemporada(2019);
-		CompeticaoCategoria competicaoCategoria2019 = new CompeticaoCategoria();
-		competicaoCategoria2019.setId(pk);
+		amadaorPrimeiraDivisao2019.setTemporada(2019);
+
 		amadaorPrimeiraDivisao2019.setNome("Campeonato Amador de Samambaia 2019");
 		amadaorPrimeiraDivisao2019.setTipoCompeticao(TipoCompeticao.PRIMEIRA_DIVISAO);
-		amadaorPrimeiraDivisao2019.getCompeticoesCategorias().add(competicaoCategoria2019);
+		amadaorPrimeiraDivisao2019.setCategoria(categoriaAdulto);
 		competicaoRepository.save(amadaorPrimeiraDivisao2019);
 
 		//Amador adulto 2 divisao
 		Competicao amadaorSegundaDivisao = new Competicao();
-		CompeticaoCategoriaPK pksegunda = new CompeticaoCategoriaPK();
-		pksegunda.setCategoria(categoriaAdulto);
-		pksegunda.setCompeticao(amadaorSegundaDivisao);
-		pksegunda.setTemporada(2018);
-		CompeticaoCategoria competicaoCategoriaSegunda = new CompeticaoCategoria();
-		competicaoCategoriaSegunda.setId(pksegunda);
-
+		amadaorSegundaDivisao.setCategoria(categoriaAdulto);
+		amadaorSegundaDivisao.setTemporada(2018);
 		amadaorSegundaDivisao.setNome("Campeonato Amador de Samambaia 2018");
 		amadaorSegundaDivisao.setTipoCompeticao(TipoCompeticao.SEGUNDA_DIVISAO);
-		amadaorSegundaDivisao.getCompeticoesCategorias().add(competicaoCategoriaSegunda);
 		competicaoRepository.save(amadaorSegundaDivisao);
 
 		//Amador adulto 2 divisao 2019
 		Competicao amadaor2019 = new Competicao();
-		CompeticaoCategoriaPK pksegunda2019 = new CompeticaoCategoriaPK();
-		pksegunda2019.setCategoria(categoriaAdulto);
-		pksegunda2019.setCompeticao(amadaor2019);
-		pksegunda2019.setTemporada(2019);
-		CompeticaoCategoria competicaoCategoriaSegunda2019 = new CompeticaoCategoria();
-		competicaoCategoriaSegunda2019.setId(pksegunda2019);
+		amadaor2019.setTemporada(2019);
 		amadaor2019.setNome("Campeonato Amador de Samambaia 2019");
 		amadaor2019.setTipoCompeticao(TipoCompeticao.SEGUNDA_DIVISAO);
-		amadaor2019.getCompeticoesCategorias().add(competicaoCategoriaSegunda2019);
+		amadaor2019.setCategoria(categoriaAdulto);
 		competicaoRepository.save(amadaor2019);
 
 		//Amador adulto 2 divisao
 		Competicao juvenilCompeticao = new Competicao();
-		CompeticaoCategoriaPK pkJuvenil = new CompeticaoCategoriaPK();
-		pkJuvenil.setCategoria(juvenil);
-		pkJuvenil.setCompeticao(juvenilCompeticao);
-		pkJuvenil.setTemporada(2018);
-		CompeticaoCategoria competicaoCategoriaJuvenil = new CompeticaoCategoria();
-		competicaoCategoriaJuvenil.setId(pkJuvenil);
+		juvenilCompeticao.setTemporada(2019);
 		juvenilCompeticao.setNome("Campeonato juvevil de Samambaia 2018");
 		juvenilCompeticao.setTipoCompeticao(TipoCompeticao.BASE);
-		juvenilCompeticao.getCompeticoesCategorias().add(competicaoCategoriaJuvenil);
+		juvenilCompeticao.setCategoria(juvenil);
 		competicaoRepository.save(juvenilCompeticao);
 
 		Equipe panelinha = new Equipe();
@@ -225,10 +201,6 @@ public class EGestaoApplication implements CommandLineRunner {
 
 
 		List<Competicao> competicoes = competicaoRepository.findAll();
-		List<Competicao> categorias = competicoes.get(2).getCompeticoesCategorias().stream().map(c->c.getId().getCompeticao()).collect(Collectors.toList());
-		categorias.forEach(c-> System.out.println(c.getNome()));
-		categorias.size();
-
 
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Novo endereco sdfdf");
