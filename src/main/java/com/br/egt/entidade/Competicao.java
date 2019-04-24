@@ -31,8 +31,6 @@ public class Competicao implements Serializable {
     @JoinColumn(name = "id_liga")
     private Liga liga;
 
-    /*@OneToMany(mappedBy = "id.competicao",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Set<CompeticaoCategoria>  competicoesCategorias = new HashSet<>();*/
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;

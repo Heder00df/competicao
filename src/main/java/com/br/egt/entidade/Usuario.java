@@ -3,6 +3,7 @@ package com.br.egt.entidade;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -38,6 +39,13 @@ public class Usuario {
     public Usuario() {
 
     }
+
+    public void setSenha(String senha){
+        BCryptPasswordEncoder bp = new BCryptPasswordEncoder();
+        this.senha = bp.encode(senha);
+
+    }
+
 
 
     public Set<Perfil> getPerfis(){

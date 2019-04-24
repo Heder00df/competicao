@@ -309,7 +309,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		usuarioLiga.setSenha("123@");
 		usuarioLiga.setLogin(nomeTime);
 		usuarioLiga.setCliente(cliente);
-		usuarioLiga.addPerfil(Perfil.DIRETOR_LIGA);
+		usuarioLiga.addPerfil(Perfil.DIRETOR_EQUIPE);
 		return usuarioLiga;
 
 	}
