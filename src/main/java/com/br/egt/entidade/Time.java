@@ -35,6 +35,14 @@ public class Time implements Serializable {
     @OneToMany(mappedBy ="pk.mandante", fetch = FetchType.EAGER)
     private List<Jogo> jogosMandante = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    @Enumerated(EnumType.STRING )
+    @Column(name = "divisao")
+    private Divisao divisao;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "time_atleta",

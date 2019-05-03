@@ -1,6 +1,6 @@
 package com.br.egt.entidade;
 
-public enum  TipoCompeticao {
+public enum Divisao {
     PRIMEIRA_DIVISAO("1ª Divisão LUFAS"),
     SEGUNDA_DIVISAO("2ª Divisão LUFAS"),
     BASE("Caterias de base");
@@ -8,7 +8,7 @@ public enum  TipoCompeticao {
 
     private String descricao;
 
-    TipoCompeticao(String descricao) {
+    Divisao(String descricao) {
         this.descricao = descricao;
     }
 }

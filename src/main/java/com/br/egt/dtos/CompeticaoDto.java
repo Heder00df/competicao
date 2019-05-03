@@ -1,7 +1,7 @@
 package com.br.egt.dtos;
 
 import com.br.egt.entidade.Competicao;
-import com.br.egt.entidade.TipoCompeticao;
+import com.br.egt.entidade.Divisao;
 import lombok.Getter;
 
 @Getter
@@ -15,7 +15,7 @@ public class CompeticaoDto {
 
     private Integer temporada;
 
-    private TipoCompeticao tipoCompeticao;
+    private Divisao tipoCompeticao;
 
     public CompeticaoDto(Competicao c) {
         this.nome = c.getNome();

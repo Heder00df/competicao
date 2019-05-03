@@ -2,14 +2,12 @@ package com.br.egt.entidade;
 
 import lombok.Getter;
 import lombok.Setter;
-import sun.plugin.javascript.navig.LinkArray;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -37,7 +35,7 @@ public class Competicao implements Serializable {
 
     @Enumerated(EnumType.STRING )
     @Column(name = "tipo_campeonato")
-    private TipoCompeticao tipoCompeticao;
+    private Divisao tipoCompeticao;
 
     @OneToMany(mappedBy = "competicao", fetch = FetchType.EAGER)
     private Set<Time> times = new HashSet<>();

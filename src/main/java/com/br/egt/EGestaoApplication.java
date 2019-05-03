@@ -10,9 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class EGestaoApplication implements CommandLineRunner {
@@ -103,8 +101,8 @@ public class EGestaoApplication implements CommandLineRunner {
 		//Amador adulto 1 divisao
 		Competicao amadaorPrimeiraDivisao = new Competicao();
 
-		amadaorPrimeiraDivisao.setNome("Campeonato Amador de Samambaia 2018");
-		amadaorPrimeiraDivisao.setTipoCompeticao(TipoCompeticao.PRIMEIRA_DIVISAO);
+		amadaorPrimeiraDivisao.setNome("Campeonato Amador de Samambaia");
+		amadaorPrimeiraDivisao.setTipoCompeticao(Divisao.PRIMEIRA_DIVISAO);
 		amadaorPrimeiraDivisao.setCategoria(categoriaAdulto);
 		amadaorPrimeiraDivisao.setTemporada(2018);
 		competicaoRepository.save(amadaorPrimeiraDivisao);
@@ -112,8 +110,8 @@ public class EGestaoApplication implements CommandLineRunner {
 		Competicao amadaorPrimeiraDivisao2019 = new Competicao();
 		amadaorPrimeiraDivisao2019.setTemporada(2019);
 
-		amadaorPrimeiraDivisao2019.setNome("Campeonato Amador de Samambaia 2019");
-		amadaorPrimeiraDivisao2019.setTipoCompeticao(TipoCompeticao.PRIMEIRA_DIVISAO);
+		amadaorPrimeiraDivisao2019.setNome("Campeonato Amador de Samambaia");
+		amadaorPrimeiraDivisao2019.setTipoCompeticao(Divisao.PRIMEIRA_DIVISAO);
 		amadaorPrimeiraDivisao2019.setCategoria(categoriaAdulto);
 		competicaoRepository.save(amadaorPrimeiraDivisao2019);
 
@@ -121,25 +119,33 @@ public class EGestaoApplication implements CommandLineRunner {
 		Competicao amadaorSegundaDivisao = new Competicao();
 		amadaorSegundaDivisao.setCategoria(categoriaAdulto);
 		amadaorSegundaDivisao.setTemporada(2018);
-		amadaorSegundaDivisao.setNome("Campeonato Amador de Samambaia 2018");
-		amadaorSegundaDivisao.setTipoCompeticao(TipoCompeticao.SEGUNDA_DIVISAO);
+		amadaorSegundaDivisao.setNome("Campeonato Amador de Samambaia");
+		amadaorSegundaDivisao.setTipoCompeticao(Divisao.SEGUNDA_DIVISAO);
 		competicaoRepository.save(amadaorSegundaDivisao);
 
 		//Amador adulto 2 divisao 2019
 		Competicao amadaor2019 = new Competicao();
 		amadaor2019.setTemporada(2019);
-		amadaor2019.setNome("Campeonato Amador de Samambaia 2019");
-		amadaor2019.setTipoCompeticao(TipoCompeticao.SEGUNDA_DIVISAO);
+		amadaor2019.setNome("Campeonato Amador de Samambaia");
+		amadaor2019.setTipoCompeticao(Divisao.SEGUNDA_DIVISAO);
 		amadaor2019.setCategoria(categoriaAdulto);
 		competicaoRepository.save(amadaor2019);
 
 		//Amador adulto 2 divisao
 		Competicao juvenilCompeticao = new Competicao();
 		juvenilCompeticao.setTemporada(2019);
-		juvenilCompeticao.setNome("Campeonato juvevil de Samambaia 2018");
-		juvenilCompeticao.setTipoCompeticao(TipoCompeticao.BASE);
+		juvenilCompeticao.setNome("Campeonato juvevil de Samambaia");
+		juvenilCompeticao.setTipoCompeticao(Divisao.BASE);
 		juvenilCompeticao.setCategoria(juvenil);
 		competicaoRepository.save(juvenilCompeticao);
+
+		//Amador adulto 2 divisao
+		Competicao infantil = new Competicao();
+		infantil.setTemporada(2019);
+		infantil.setNome("Campeonato infantil de Samambaia");
+		infantil.setTipoCompeticao(Divisao.BASE);
+		infantil.setCategoria(infatil);
+		competicaoRepository.save(infantil);
 
 		Equipe panelinha = new Equipe();
 		panelinha.setDescricao("Panelinha Futebol Clube");
@@ -148,11 +154,16 @@ public class EGestaoApplication implements CommandLineRunner {
 		Time timePanelinha2018 = new Time();
 		timePanelinha2018.setCompeticao(amadaorSegundaDivisao);
 		timePanelinha2018.setEquipe(panelinha);
+		timePanelinha2018.setDivisao(Divisao.SEGUNDA_DIVISAO);
+		timePanelinha2018.setCategoria(categoriaAdulto);
 		panelinha.getTimes().add(timePanelinha2018);
+
 
 		Time timePanelinha2019 = new Time();
 		timePanelinha2019.setCompeticao(amadaorPrimeiraDivisao2019);
 		timePanelinha2019.setEquipe(panelinha);
+		timePanelinha2019.setDivisao(Divisao.PRIMEIRA_DIVISAO);
+		timePanelinha2019.setCategoria(categoriaAdulto);
 		panelinha.getTimes().add(timePanelinha2019);
 
 		Equipe equipeReal = new Equipe();
@@ -162,11 +173,15 @@ public class EGestaoApplication implements CommandLineRunner {
 		Time timeReal2018 = new Time();
 		timeReal2018.setCompeticao(amadaorPrimeiraDivisao);
 		timeReal2018.setEquipe(equipeReal);
+		timeReal2018.setDivisao(Divisao.PRIMEIRA_DIVISAO);
+		timeReal2018.setCategoria(categoriaAdulto);
 		equipeReal.getTimes().add(timeReal2018);
 
 		Time timeReal2019 = new Time();
 		timeReal2019.setCompeticao(amadaorPrimeiraDivisao2019);
 		timeReal2019.setEquipe(equipeReal);
+		timeReal2019.setDivisao(Divisao.PRIMEIRA_DIVISAO);
+		timeReal2019.setCategoria(categoriaAdulto);
 		equipeReal.getTimes().add(timeReal2019);
 
 
@@ -177,11 +192,15 @@ public class EGestaoApplication implements CommandLineRunner {
 		Time timeParma2018 = new Time();
 		timeParma2018.setCompeticao(amadaorPrimeiraDivisao);
 		timeParma2018.setEquipe(equipeParma);
+		timeParma2018.setDivisao(Divisao.PRIMEIRA_DIVISAO);
+		timeParma2018.setCategoria(categoriaAdulto);
 		equipeParma.getTimes().add(timeParma2018);
 
 		Time timeParma2019 = new Time();
 		timeParma2019.setCompeticao(amadaorPrimeiraDivisao2019);
 		timeParma2019.setEquipe(equipeParma);
+		timeParma2019.setDivisao(Divisao.PRIMEIRA_DIVISAO);
+		timeParma2019.setCategoria(categoriaAdulto);
 		equipeParma.getTimes().add(timeParma2019);
 
 		Equipe mafia = new Equipe();
@@ -191,12 +210,29 @@ public class EGestaoApplication implements CommandLineRunner {
 		Time timeMafia2018 = new Time();
 		timeMafia2018.setCompeticao(amadaorPrimeiraDivisao);
 		timeMafia2018.setEquipe(mafia);
+		timeMafia2018.setDivisao(Divisao.PRIMEIRA_DIVISAO);
+		timeMafia2018.setCategoria(categoriaAdulto);
 		mafia.getTimes().add(timeMafia2018);
+
+		Time timeMafiaJuvenil2018 = new Time();
+		timeMafiaJuvenil2018.setCompeticao(juvenilCompeticao);
+		timeMafiaJuvenil2018.setEquipe(mafia);
+		timeMafiaJuvenil2018.setDivisao(Divisao.BASE);
+		timeMafiaJuvenil2018.setCategoria(juvenil);
+		mafia.getTimes().add(timeMafiaJuvenil2018);
+
+		Time timeMafiaInfatil = new Time();
+		timeMafiaInfatil.setCompeticao(infantil);
+		timeMafiaInfatil.setEquipe(mafia);
+		timeMafiaInfatil.setDivisao(Divisao.BASE);
+		timeMafiaInfatil.setCategoria(infatil);
+		mafia.getTimes().add(timeMafiaInfatil);
 
 		Time timemafia2019 = new Time();
 		timemafia2019.setCompeticao(amadaorPrimeiraDivisao2019);
 		timemafia2019.setEquipe(mafia);
-
+		timemafia2019.setDivisao(Divisao.PRIMEIRA_DIVISAO);
+		timemafia2019.setCategoria(categoriaAdulto);
 		mafia.getTimes().add(timemafia2019);
 
 
@@ -218,10 +254,17 @@ public class EGestaoApplication implements CommandLineRunner {
 		Telefone fixo = new Telefone();
 		fixo.setNumero(999342035L);
 
+		Telefone celular2 = new Telefone();
+		celular2.setNumero(33589316L);
+
+		Telefone fixo2 = new Telefone();
+		fixo2.setNumero(999342035L);
+
 
 		Atleta heder = new Atleta();
 		heder.setEndereco(endereco);
 		heder.getTelefones().add(fixo);
+		heder.setNome("Heder Machado da Silva");
 		fixo.setAtleta(heder);
 		heder.setCpf(69638969172L);
 		heder.setPosicao("Lateral");
@@ -229,6 +272,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		heder.setRg(1895541L);
 		heder.setEmail("heder00df@gmail.com");
 		heder.setEquipe(panelinha);
+
 
 		//usuarioService.salvarUsuario(usuarioPanelinha);
 		equipeRepository.save(panelinha);
@@ -250,6 +294,8 @@ public class EGestaoApplication implements CommandLineRunner {
 
 		timeRepository.save(timemafia2019);
 		timeRepository.save(timeMafia2018);
+		timeRepository.save(timeMafiaJuvenil2018);
+		timeRepository.save(timeMafiaInfatil);
 
 		timeRepository.save(timeParma2018);
 		timeRepository.save(timeParma2019);
@@ -288,8 +334,11 @@ public class EGestaoApplication implements CommandLineRunner {
 		List<Time> times = timeRepository.recuperarTimesPorCompeticao(2L);
 		jogoService.gerarPartidas(times);
 
-		Time pa = timeRepository.findById(timePanelinha2019.getId()).get();
+		List<Time> timesJuvenis = timeRepository.findByCategoriaAndDivisao(juvenil, Divisao.BASE );
 
+		List<Time> timesAdulto = timeRepository.findByCategoriaAndDivisao(categoriaAdulto, Divisao.PRIMEIRA_DIVISAO );
+
+		Time pa = timeRepository.findById(timePanelinha2019.getId()).get();
 
 		Usuario usuarioLiga = new Usuario();
 		usuarioLiga.setEmail("lufas@gmail.com.br");

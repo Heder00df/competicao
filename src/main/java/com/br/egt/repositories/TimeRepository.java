@@ -1,5 +1,7 @@
 package com.br.egt.repositories;
 
+import com.br.egt.entidade.Categoria;
+import com.br.egt.entidade.Divisao;
 import com.br.egt.entidade.Time;
 import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +17,7 @@ public interface TimeRepository extends JpaRepository<Time, Long> {
 
     @Query("SELECT t FROM Time t WHERE t.competicao.id= :codigoCompeticao")
     List<Time> recuperarTimesPorCompeticao(@Param("codigoCompeticao") Long codigoCompeticao);
+
+    List<Time>findByCategoriaAndDivisao(Categoria categoria, Divisao divisao);
 
 }

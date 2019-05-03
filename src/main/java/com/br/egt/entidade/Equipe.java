@@ -2,6 +2,7 @@ package com.br.egt.entidade;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
 
 import javax.persistence.*;
 import java.io.Serializable;
