@@ -16,9 +16,9 @@ public class CompeticaoController {
     private CompeticaoService service;
 
     @PostMapping("/inserir")
-    public Competicao salvarCompeticao(@RequestBody Competicao competicao){
+    public List<CompeticaoDto> salvarCompeticao(@RequestBody CompeticaoDto competicao){
         service.salvarCompeticao(competicao);
-        return competicao;
+        return service.buscarTodasCompeticoes();
     }
 
     @GetMapping("/competicoes")

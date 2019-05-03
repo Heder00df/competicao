@@ -3,8 +3,12 @@ package com.br.egt.dtos;
 import com.br.egt.entidade.Competicao;
 import com.br.egt.entidade.Divisao;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 @Getter
+@Setter
 public class CompeticaoDto {
 
     private String nome;
@@ -16,6 +20,8 @@ public class CompeticaoDto {
     private Integer temporada;
 
     private Divisao tipoCompeticao;
+
+    private List<TimeDto> times;
 
     public CompeticaoDto(Competicao c) {
         this.nome = c.getNome();

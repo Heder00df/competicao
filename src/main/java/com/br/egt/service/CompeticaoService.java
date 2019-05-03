@@ -2,6 +2,7 @@ package com.br.egt.service;
 
 import com.br.egt.dtos.CompeticaoDto;
 import com.br.egt.entidade.Competicao;
+import com.br.egt.repositories.CategoriaRepository;
 import com.br.egt.repositories.CompeticaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class CompeticaoService {
     @Autowired
     private CompeticaoRepository repo;
 
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+
     public Competicao buscarCompeticaoPorId(Long id){
 
         Optional<Competicao> comp = repo.findById(id);
@@ -26,7 +31,16 @@ public class CompeticaoService {
 
     }
 
-    public Competicao salvarCompeticao(Competicao competicao){
+    public Competicao salvarCompeticao(CompeticaoDto dto){
+
+
+        Competicao competicao = new Competicao();
+        competicao.setNome(dto.getNome());
+        competicao.setTipoCompeticao(dto.getTipoCompeticao());
+        competicao.setCategoria(categoriaRepository.findByDescricao(dto.getCategoria().getDescricao()));
+        competicao.setTimes();
+
+
         return repo.save(competicao);
     }
 
