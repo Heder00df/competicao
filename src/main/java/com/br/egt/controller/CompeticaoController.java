@@ -1,9 +1,11 @@
 package com.br.egt.controller;
 
 import com.br.egt.dtos.CompeticaoDto;
+import com.br.egt.dtos.CompeticaoParametro;
 import com.br.egt.entidade.Competicao;
 import com.br.egt.service.CompeticaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,9 +18,15 @@ public class CompeticaoController {
     private CompeticaoService service;
 
     @PostMapping("/inserir")
-    public Competicao salvarCompeticao(@RequestBody Competicao competicao){
-        service.salvarCompeticao(competicao);
-        return competicao;
+    public List<CompeticaoDto> salvarCompeticao(@RequestBody CompeticaoParametro parametro){
+        service.salvarCompeticao(parametro);
+        return service.buscarTodasCompeticoes();
+    }
+
+    @PostMapping("/excluir")
+    public List<CompeticaoDto> excluirCompeticao(@RequestBody CompeticaoDto competicao){
+        service.excluir(competicao.getCodigo());
+        return service.buscarTodasCompeticoes();
     }
 
     @GetMapping("/competicoes")

@@ -29,10 +29,10 @@ public class Time implements Serializable {
     @JoinColumn(name = "id_equipe")
     private Equipe equipe;
 
-    @OneToMany(mappedBy ="pk.visitante", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy ="pk.visitante", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Jogo> jogosVisitante = new ArrayList<>();
 
-    @OneToMany(mappedBy ="pk.mandante", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy ="pk.mandante", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Jogo> jogosMandante = new ArrayList<>();
 
     @ManyToOne
@@ -43,7 +43,7 @@ public class Time implements Serializable {
     @Column(name = "divisao")
     private Divisao divisao;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "time_atleta",
             joinColumns = { @JoinColumn(name = "id_time") },

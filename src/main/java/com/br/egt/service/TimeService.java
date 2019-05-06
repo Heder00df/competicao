@@ -24,9 +24,9 @@ public class TimeService {
         return repo.recuperarTimesPorCompeticao(codigoCompeticao);
     }
 
-    public Set<TimeDto> recuperarTimesPorCategoriaEDivisao(Categoria categoria, Divisao divisao){
+    public List<TimeDto> recuperarTimesPorCategoriaEDivisao(Categoria categoria, Divisao divisao){
         List<Time> times = repo.findByCategoriaAndDivisao(categoria, divisao);
 
-        return  new HashSet<>(times.stream().map(time -> new TimeDto(time)).collect(Collectors.toList()));
+        return  times.stream().map(time -> new TimeDto(time)).collect(Collectors.toList());
     }
 }
