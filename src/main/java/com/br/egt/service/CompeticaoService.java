@@ -4,6 +4,7 @@ import com.br.egt.dtos.CompeticaoDto;
 import com.br.egt.dtos.CompeticaoParametro;
 import com.br.egt.entidade.Competicao;
 import com.br.egt.entidade.Divisao;
+import com.br.egt.entidade.SituacaoCompeticao;
 import com.br.egt.entidade.Time;
 import com.br.egt.repositories.CategoriaRepository;
 import com.br.egt.repositories.CompeticaoRepository;
@@ -36,7 +37,9 @@ public class CompeticaoService {
     }
 
     public List<CompeticaoDto> excluir(Long id) {
-        repo.delete(repo.findById(id).get());
+        Competicao compAlterada = repo.findById(id).get();
+        compAlterada.setSituacao(SituacaoCompeticao.EXCLUIDO);
+        repo.save(compAlterada);
         return buscarTodasCompeticoes();
     }
 
@@ -44,6 +47,7 @@ public class CompeticaoService {
         Competicao nova =  new Competicao();
         nova.setCategoria(categoriaRepository.findByDescricao(parametro.getCategoria()));
         nova.setTipoCompeticao(Divisao.valueOf(parametro.getDivisao()));
+        nova.setSituacao(SituacaoCompeticao.ATIVO);
         nova.setNome(parametro.getNome());
         nova.setTemporada(LocalDate.now().getYear());
         Set<Time> times = new HashSet<>();
@@ -64,9 +68,14 @@ public class CompeticaoService {
 
     private List<CompeticaoDto> converterParaDto(List<Competicao> all) {
         if(all != null){
-            return all.stream().map(c-> new CompeticaoDto(c)).collect(Collectors.toList());
+            return all.stream()
+                    .filter(f-> !f.getSituacao().equals(SituacaoCompeticao.EXCLUIDO))
+                    .map(c-> new CompeticaoDto(c)).collect(Collectors.toList());
         }
         return Collections.emptyList();
     }
 
+    public List<CompeticaoDto> competicoesEmAndamento() {
+        return repo.findBySituacao(SituacaoCompeticao.ATIVO);
+    }
 }

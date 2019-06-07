@@ -25,6 +25,9 @@ public class Competicao implements Serializable {
 
     private Integer temporada;
 
+    @Enumerated(EnumType.STRING)
+    private SituacaoCompeticao situacao;
+
     @ManyToOne
     @JoinColumn(name = "id_liga")
     private Liga liga;

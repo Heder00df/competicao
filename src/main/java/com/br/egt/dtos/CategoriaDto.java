@@ -10,6 +10,8 @@ public class CategoriaDto {
     private String descricao;
     private Integer idadeMaxima;
 
+    public CategoriaDto(){}
+
     public CategoriaDto(String descricao, Integer idadeMaxima) {
         this.descricao = descricao;
         this.idadeMaxima = idadeMaxima;

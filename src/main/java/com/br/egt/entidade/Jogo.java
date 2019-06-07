@@ -25,6 +25,13 @@ public class Jogo implements Serializable {
     @JoinColumn(name = "id_campo")
     private Campo campo;
 
+    @Enumerated
+    private Resultado resultado;
+
+    private Integer placarTimeVisitante;
+
+    private Integer placarTimeMandante;
+
 
     public Jogo(){}
 

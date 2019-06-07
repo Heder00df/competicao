@@ -39,6 +39,4 @@ public class JogoController {
         return jogoService.recuperaJogosPorRodada(rodada);
     }
 
-
-
 }

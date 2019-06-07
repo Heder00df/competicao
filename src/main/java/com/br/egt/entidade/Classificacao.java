@@ -24,11 +24,11 @@ public class Classificacao implements Serializable {
     @JoinColumn(name = "competicao_id")
     private Competicao competicao;
 
-    private Integer pontos;
+    private int pontos;
 
-    private Integer vitorias;
+    private int vitorias;
 
-    private Integer derrotas;
+    private int derrotas;
 
-    private Integer empates;
+    private int empates;
 }

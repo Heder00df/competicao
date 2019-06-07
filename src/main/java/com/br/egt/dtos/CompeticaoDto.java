@@ -21,6 +21,8 @@ public class CompeticaoDto {
 
     private Divisao tipoCompeticao;
 
+    private String situacao;
+
     public CompeticaoDto() {}
 
     public CompeticaoDto(Competicao c) {
@@ -29,6 +31,7 @@ public class CompeticaoDto {
         this.premio = c.getPremio();
         this.temporada = c.getTemporada();
         this.tipoCompeticao = c.getTipoCompeticao();
+        this.situacao = c.getSituacao().getDescricao();
         this.categoria = new CategoriaDto(c.getCategoria().getDescricao(), c.getCategoria().getIdadeMaxima());
     }
 }

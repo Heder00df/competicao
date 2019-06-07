@@ -80,4 +80,11 @@ public class JogoService {
         repo.saveAll(jogos);
     }
 
+    public void atualizarJogo(Jogo jogo) {
+        repo.save(jogo);
+    }
+
+    public List<Jogo> salvar(List<Jogo> jogos) {
+        return repo.saveAll(jogos);
+    }
 }

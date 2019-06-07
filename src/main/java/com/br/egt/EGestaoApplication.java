@@ -1,5 +1,6 @@
 package com.br.egt;
 
+import com.br.egt.dtos.CompeticaoDto;
 import com.br.egt.entidade.*;
 import com.br.egt.repositories.*;
 import com.br.egt.service.JogoService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -105,6 +107,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		amadaorPrimeiraDivisao.setTipoCompeticao(Divisao.PRIMEIRA_DIVISAO);
 		amadaorPrimeiraDivisao.setCategoria(categoriaAdulto);
 		amadaorPrimeiraDivisao.setTemporada(2018);
+		amadaorPrimeiraDivisao.setSituacao(SituacaoCompeticao.FINALIZADO);
 		competicaoRepository.save(amadaorPrimeiraDivisao);
 
 		Competicao amadaorPrimeiraDivisao2019 = new Competicao();
@@ -113,6 +116,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		amadaorPrimeiraDivisao2019.setNome("Campeonato Amador de Samambaia");
 		amadaorPrimeiraDivisao2019.setTipoCompeticao(Divisao.PRIMEIRA_DIVISAO);
 		amadaorPrimeiraDivisao2019.setCategoria(categoriaAdulto);
+		amadaorPrimeiraDivisao2019.setSituacao(SituacaoCompeticao.ATIVO);
 		competicaoRepository.save(amadaorPrimeiraDivisao2019);
 
 		//Amador adulto 2 divisao
@@ -120,13 +124,24 @@ public class EGestaoApplication implements CommandLineRunner {
 		amadaorSegundaDivisao.setCategoria(categoriaAdulto);
 		amadaorSegundaDivisao.setTemporada(2018);
 		amadaorSegundaDivisao.setNome("Campeonato Amador de Samambaia");
+		amadaorSegundaDivisao.setSituacao(SituacaoCompeticao.FINALIZADO);
 		amadaorSegundaDivisao.setTipoCompeticao(Divisao.SEGUNDA_DIVISAO);
 		competicaoRepository.save(amadaorSegundaDivisao);
+
+		//Competicao excluida
+		Competicao exluida = new Competicao();
+		exluida.setCategoria(categoriaAdulto);
+		exluida.setTemporada(2018);
+		exluida.setNome("Campeonato Amador de Samambaia");
+		exluida.setSituacao(SituacaoCompeticao.EXCLUIDO);
+		exluida.setTipoCompeticao(Divisao.SEGUNDA_DIVISAO);
+		competicaoRepository.save(exluida);
 
 		//Amador adulto 2 divisao 2019
 		Competicao amadaor2019 = new Competicao();
 		amadaor2019.setTemporada(2019);
 		amadaor2019.setNome("Campeonato Amador de Samambaia");
+		amadaor2019.setSituacao(SituacaoCompeticao.ATIVO);
 		amadaor2019.setTipoCompeticao(Divisao.SEGUNDA_DIVISAO);
 		amadaor2019.setCategoria(categoriaAdulto);
 		competicaoRepository.save(amadaor2019);
@@ -136,6 +151,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		juvenilCompeticao.setTemporada(2019);
 		juvenilCompeticao.setNome("Campeonato juvevil de Samambaia");
 		juvenilCompeticao.setTipoCompeticao(Divisao.BASE);
+		juvenilCompeticao.setSituacao(SituacaoCompeticao.ATIVO);
 		juvenilCompeticao.setCategoria(juvenil);
 		competicaoRepository.save(juvenilCompeticao);
 
@@ -144,6 +160,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		infantil.setTemporada(2019);
 		infantil.setNome("Campeonato infantil de Samambaia");
 		infantil.setTipoCompeticao(Divisao.BASE);
+		infantil.setSituacao(SituacaoCompeticao.ATIVO);
 		infantil.setCategoria(infatil);
 		competicaoRepository.save(infantil);
 
@@ -237,6 +254,7 @@ public class EGestaoApplication implements CommandLineRunner {
 
 
 		List<Competicao> competicoes = competicaoRepository.findAll();
+		List<CompeticaoDto> competicoesAtivas = competicaoRepository.findBySituacao(SituacaoCompeticao.ATIVO);
 
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Novo endereco sdfdf");
@@ -304,7 +322,7 @@ public class EGestaoApplication implements CommandLineRunner {
 		timeRepository.save(timeReal2019);
 
 
-		Classificacao c1 = new Classificacao();
+/*		Classificacao c1 = new Classificacao();
 		c1.setDerrotas(3);
 		c1.setEmpates(2);
 		c1.setVitorias(5);
@@ -331,8 +349,63 @@ public class EGestaoApplication implements CommandLineRunner {
 		c3.setCompeticao(amadaorPrimeiraDivisao2019);
 		classificacaoRepository.save(c3);
 
+		Classificacao c4 = new Classificacao();
+		c4.setDerrotas(3);
+		c4.setEmpates(5);
+		c4.setVitorias(3);
+		c4.setPontos(15);
+		c4.setTime(timeParma2019);
+		c4.setCompeticao(amadaorPrimeiraDivisao2019);
+		classificacaoRepository.save(c4);*/
+
+
 		List<Time> times = timeRepository.recuperarTimesPorCompeticao(2L);
 		jogoService.gerarPartidas(times);
+
+		List<Jogo> primeiraRodada = jogoService.recuperaJogosPorRodada(1);
+		primeiraRodada.get(0).setResultado(Resultado.MANDANTE);
+		primeiraRodada.get(0).setPlacarTimeMandante(3);
+		primeiraRodada.get(0).setPlacarTimeVisitante(1);
+
+		primeiraRodada.get(1).setResultado(Resultado.VISITANTE);
+		primeiraRodada.get(1).setPlacarTimeMandante(3);
+		primeiraRodada.get(1).setPlacarTimeVisitante(5);
+
+
+		List<Jogo> jogosSegundaRodada = jogoService.recuperaJogosPorRodada(2);
+		jogosSegundaRodada.get(0).setResultado(Resultado.VISITANTE);
+		jogosSegundaRodada.get(0).setPlacarTimeMandante(4);
+		jogosSegundaRodada.get(0).setPlacarTimeVisitante(5);
+
+		jogosSegundaRodada.get(1).setResultado(Resultado.VISITANTE);
+		jogosSegundaRodada.get(1).setPlacarTimeMandante(5);
+		jogosSegundaRodada.get(1).setPlacarTimeVisitante(6);
+
+
+		List<Jogo> jogosTerceiraRodada = jogoService.recuperaJogosPorRodada(2);
+		jogosTerceiraRodada.get(0).setResultado(Resultado.VISITANTE);
+		jogosTerceiraRodada.get(0).setPlacarTimeMandante(4);
+		jogosTerceiraRodada.get(0).setPlacarTimeVisitante(5);
+
+		jogosTerceiraRodada.get(1).setResultado(Resultado.VISITANTE);
+		jogosTerceiraRodada.get(1).setPlacarTimeMandante(5);
+		jogosTerceiraRodada.get(1).setPlacarTimeVisitante(6);
+
+
+		jogoService.salvar(jogosSegundaRodada);
+		processarClassificacao(jogosSegundaRodada, amadaorPrimeiraDivisao2019);
+
+		jogoService.salvar(primeiraRodada);
+		processarClassificacao(primeiraRodada, amadaorPrimeiraDivisao2019);
+
+		jogoService.salvar(jogosTerceiraRodada);
+		processarClassificacao(jogosTerceiraRodada, amadaorPrimeiraDivisao2019);
+
+
+
+		jogoService.atualizarJogo(primeiraRodada.get(0));
+
+		List<Classificacao> classificacaoAtualizada = classificacaoRepository.findAll(Sort.by(Sort.Direction.DESC,"pontos","vitorias"));
 
 		List<Time> timesJuvenis = timeRepository.findByCategoriaAndDivisao(juvenil, Divisao.BASE );
 
@@ -350,6 +423,93 @@ public class EGestaoApplication implements CommandLineRunner {
 		cliente.getUsuarios().add(usuarioLiga);
 		clienteRepository.save(cliente);
 		usuarioService.salvarUsuario(usuarioLiga);
+	}
+
+	private void processarClassificacao(List<Jogo> jogos, Competicao amadaorPrimeiraDivisao2019) {
+		jogos.stream().forEach(j-> {
+			if(j.getResultado().equals(Resultado.EMPATE)){
+
+				Classificacao classificacaoVisitante = classificacaoRepository
+						.findByTimeAndCompeticao(j.getVisitante(), amadaorPrimeiraDivisao2019);
+
+				if(classificacaoVisitante == null)
+					classificacaoVisitante = new Classificacao();
+
+				classificacaoVisitante.setEmpates(classificacaoVisitante.getEmpates()+1);
+				classificacaoVisitante.setPontos(classificacaoVisitante.getPontos()+1);
+				classificacaoRepository.save(classificacaoVisitante);
+
+				Classificacao classificacaoMandante = classificacaoRepository
+						.findByTimeAndCompeticao(j.getVisitante(), amadaorPrimeiraDivisao2019);
+
+				if(classificacaoMandante == null)
+					classificacaoMandante = new Classificacao();
+
+				classificacaoMandante.setEmpates(classificacaoMandante.getEmpates()+1);
+				classificacaoMandante.setPontos(classificacaoMandante.getPontos()+1);
+				classificacaoRepository.save(classificacaoMandante);
+
+			}
+			if(j.getResultado().equals(Resultado.MANDANTE)){
+
+				Classificacao classificacaoVisitante = classificacaoRepository
+						.findByTimeAndCompeticao(j.getVisitante(), amadaorPrimeiraDivisao2019);
+
+				if(classificacaoVisitante == null){
+					classificacaoVisitante = new Classificacao();
+					classificacaoVisitante.setTime(j.getVisitante());
+					classificacaoVisitante.setCompeticao(j.getVisitante().getCompeticao());
+				}
+
+				classificacaoVisitante.setDerrotas(classificacaoVisitante.getDerrotas()+1);
+				classificacaoRepository.save(classificacaoVisitante);
+
+				// Mandante
+				Classificacao classificacaoMandante = classificacaoRepository
+						.findByTimeAndCompeticao(j.getMandante(), amadaorPrimeiraDivisao2019);
+
+				if(classificacaoMandante == null) {
+					classificacaoMandante = new Classificacao();
+					classificacaoMandante.setTime(j.getMandante());
+					classificacaoMandante.setCompeticao(j.getMandante().getCompeticao());
+				}
+
+				classificacaoMandante.setVitorias(classificacaoMandante.getVitorias()+1);
+				classificacaoMandante.setPontos(classificacaoMandante.getPontos()+3);
+				classificacaoRepository.save(classificacaoMandante);
+
+			}
+			if(j.getResultado().equals(Resultado.VISITANTE)){
+
+				Classificacao classificacaoVisitante = classificacaoRepository
+						.findByTimeAndCompeticao(j.getVisitante(), amadaorPrimeiraDivisao2019);
+
+				if(classificacaoVisitante == null) {
+					classificacaoVisitante = new Classificacao();
+					classificacaoVisitante.setTime(j.getVisitante());
+					classificacaoVisitante.setCompeticao(j.getVisitante().getCompeticao());
+				}
+
+				classificacaoVisitante.setVitorias(classificacaoVisitante.getVitorias()+1);
+				classificacaoVisitante.setPontos(classificacaoVisitante.getPontos()+3);
+				classificacaoRepository.save(classificacaoVisitante);
+
+				//Mandante
+				Classificacao classificacaoMandante = classificacaoRepository
+						.findByTimeAndCompeticao(j.getMandante(), amadaorPrimeiraDivisao2019);
+
+				if(classificacaoMandante == null) {
+					classificacaoMandante = new Classificacao();
+					classificacaoMandante.setTime(j.getMandante());
+					classificacaoMandante.setCompeticao(j.getMandante().getCompeticao());
+				}
+
+				classificacaoMandante.setDerrotas(classificacaoMandante.getDerrotas()+1);
+				classificacaoRepository.save(classificacaoMandante);
+
+			}
+
+		});
 	}
 
 	private Usuario gerarUsuario(String nomeTime, Cliente cliente){

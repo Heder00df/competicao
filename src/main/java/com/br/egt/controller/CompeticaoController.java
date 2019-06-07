@@ -25,13 +25,16 @@ public class CompeticaoController {
 
     @PostMapping("/excluir")
     public List<CompeticaoDto> excluirCompeticao(@RequestBody CompeticaoDto competicao){
-        service.excluir(competicao.getCodigo());
-        return service.buscarTodasCompeticoes();
+        return service.excluir(competicao.getCodigo());
     }
 
     @GetMapping("/competicoes")
     public List<CompeticaoDto> competicoes(){
         return service.buscarTodasCompeticoes();
 
+    }
+
+    public List<CompeticaoDto> competicoesEmAndamento(){
+        return service.competicoesEmAndamento();
     }
 }
